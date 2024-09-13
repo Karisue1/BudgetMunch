@@ -4,14 +4,14 @@ import axios from "axios";
 export default function Home() {
 const [students, setStudents] = useState([])
 
-useEffect(()=>{
-  loadStudents();
-},[]);
+//useEffect(()=>{
+//  loadStudents();
+//},[]);
 
-const loadStudents =async ()=>{
-  const result=await axios.get("localhost");
-  setStudents(result.data);
-}
+//const loadStudents =async ()=>{
+ // const result=await axios.get("localhost");
+  //setStudents(result.data);
+//}
 
   return (
     <div className="container">
