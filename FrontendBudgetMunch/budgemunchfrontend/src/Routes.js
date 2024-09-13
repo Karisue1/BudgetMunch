@@ -6,7 +6,7 @@ export const Routes =() => {
     return(
         <Router>
             <Switch>
-                <Route path="/">
+                <Route path="/" exact>
                     <FavoritesPage/>
                 </Route>
                 <Route path="/favorites/:listID">
