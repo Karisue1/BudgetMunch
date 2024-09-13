@@ -4,14 +4,14 @@ import axios from "axios";
 export default function Home() {
 const [students, setStudents] = useState([])
 
-//useEffect(()=>{
-  //loadStudents();
-//},[]);
+useEffect(()=>{
+  loadStudents();
+},[]);
 
-//const loadStudents =async ()=>{
- // const result=await axios.get("localhost");
-  //setStudents(result.data);
-//}
+const loadStudents =async ()=>{
+ const result=await axios.get("http://localhost:8080/api/v1/budget/getLocation");
+  setStudents(result.data);
+}
 
   return (
     <div className="container">
@@ -24,6 +24,7 @@ const [students, setStudents] = useState([])
       <th scope="col">Email</th>
       <th scope="col">Age</th>
       <th scope="col">Action</th>
+      <th scope="col">priceLevel</th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +35,7 @@ const [students, setStudents] = useState([])
       <td>{student.name}</td>
       <td>{student.email}</td>
       <td>{student.age}</td>
+      <td>{student.priceLevel}</td>
     </tr>
       ))
     }
