@@ -4,18 +4,15 @@ import Navbar from './layout/Navbar';
 import Home from './pages/Home';
 import { Routes } from './Routes';
 
-export const App = () => {
-  return (
-    <Routes />
-  )
-}
+
 
 function App() {
   return (
+    <><Routes />
     <div className="App">
       <Navbar />
       <Home />
-    </div>
+    </div></>
   );
 }
 
