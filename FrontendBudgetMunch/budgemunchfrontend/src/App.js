@@ -6,29 +6,19 @@ import Home from './pages/Home';
 import { AppRoutes } from './Routes';
 import { Link } from 'react-router-dom';
 import Login from './pages/Login/Login';
+import { Routes, Route } from 'react-router-dom';
+import { FavoritesPage } from './pages/FavoritesPage';
+import { NotesDetailPage } from './pages/NoteDetailPage'; 
+import { NotFoundPage } from './pages/NotFoundPage';
+
 
 function App() {
   return (
-    <><div className="App">
+    <div className="App">
       <Navbar />
-      <div>
-        <Login />
-      </div>
-      <ul>
-        <Home />
-        <Link to="/">Favorites</Link>
-
-      </ul>
-      <ul>
-        <AppRoutes />
-        <Link to="/favorites/:listID">Details</Link>
-
-      </ul>
-    </div><Routes>
-        <Route path="/" element={<FavoritesPage />} />
-        <Route path="/favorites/:listID" element={<NotesDetailPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes></>
+      <Home />
+     
+    </div>
   );
 }
 

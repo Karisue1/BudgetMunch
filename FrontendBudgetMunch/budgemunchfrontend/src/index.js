@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, BrowserRouter, Route } from 'react-router-dom';  // Import BrowserRouter
+import { createBrowserRouter, BrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './App'; 
+import { FavoritesPage } from './pages/FavoritesPage';
+import { NotesDetailPage } from './pages/NoteDetailPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import Login from './pages/Login/Login';
+import reportWebVitals from './reportWebVitals';
 
-const router = createBrowserRouter(
-  {
+
+
+const router = createBrowserRouter([ {
+  path: "/",
+  element: <App />,
+  children: [
+    { path: "favorites", element: <FavoritesPage /> },
+    { path: "notes/:id", element: <NotesDetailPage /> },
+    { path: "*", element: <NotFoundPage /> },
+  ],
+},{
     path: "/",
     elemnet: <App/>,
   },
@@ -15,12 +26,14 @@ const router = createBrowserRouter(
     path: "Login",
     elemnet: <Login/>,
   }
-)
+]);
+  
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>  {/* Wrap App in BrowserRouter */}
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>
