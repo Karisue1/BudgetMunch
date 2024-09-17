@@ -1,9 +1,10 @@
 import React from 'react';
 
+
 export default function Navbar() {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-success" style={{ fontFamily: 'Playwrite AU NSW, sans-serif' }}>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-success" style={{ fontFamily: 'Leckerli One' }}>
   <div className="container-fluid">
     <img src="/logo small.png" alt="BudgetMunch Logo" width="100" height="100" className="d-inline-block align-text-top" />
       <a className="navbar-brand" href="#">BudgetMunch</a>
@@ -16,7 +17,7 @@ export default function Navbar() {
                 aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-    <button className="btn btn-outline-light">Add Student</button>
+    <button className="btn btn-outline-light">Login/Sign-up</button>
   </div>
 </nav>
     </div>
