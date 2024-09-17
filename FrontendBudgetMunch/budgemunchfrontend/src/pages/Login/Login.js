@@ -7,7 +7,6 @@ import Navbar from '../../layout/Navbar';
 const Login = () => {
     return (
         <div>
-            <Navbar />
             <div className='wrapper'>
                 <form action="">
                     <h1>Login</h1>
@@ -25,7 +24,7 @@ const Login = () => {
                     </div>
                     <button type="submit">Login</button>
                     <div className='register-link'>
-                        <p>Don't have an account? <a href="#">Register</a></p>
+                        <p>Don't have an account? <a href="#">Register now here</a></p>
                     </div>
                 </form>
             </div>
