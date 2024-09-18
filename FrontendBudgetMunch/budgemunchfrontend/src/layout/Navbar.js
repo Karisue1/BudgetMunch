@@ -11,7 +11,7 @@ export default function Navbar() {
   <div className="container-fluid">
     <img src="/logo small.png" alt="BudgetMunch Logo" width="100" height="100" className="d-inline-block align-text-top" />
       <a className="navbar-brand" style={{ fontSize: '75px'}} href="#">BudgetMunch</a>
-        <button className="navbar-toggler"
+        <Link className= "btn navbar-toggler" to="/favorites"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
@@ -19,15 +19,10 @@ export default function Navbar() {
                 aria-expanded="false"
                 aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
-        </button>
-        
-        <Link className="btn btn-outline-light" to="/login">Login</Link>
-        
-               
-
-        
+        </Link>
+        <Link className="btn btn-outline-light" to="/login">Login</Link>       
       </div>
-      </nav>
+    </nav>
   </div>
   )
 }

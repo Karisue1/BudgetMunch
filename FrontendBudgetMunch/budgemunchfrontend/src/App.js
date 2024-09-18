@@ -16,13 +16,7 @@ function App() {
   return (
     <div className="App">
       <Navbar /> 
-      <ul>
-        <Link to="/">Login</Link> 
-      </ul>
       
-      <ul>
-        <Link to="/notes/1">Details</Link>
-      </ul>
       <ul>
         <Routes>
           <Route path="/login" element={<Login />} />
