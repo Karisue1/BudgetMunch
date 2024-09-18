@@ -15,8 +15,10 @@ import { NotFoundPage }  from './pages/NotFoundPage';
 function App() {
   return (
     <div className="App">
-      <Navbar /> 
-      
+
+
+    <Navbar></Navbar>
+    <br></br>
       <ul>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -25,8 +27,8 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </ul>
-      
-    
+
+
     </div>
   );
 }
