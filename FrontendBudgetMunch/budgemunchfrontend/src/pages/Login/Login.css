@@ -16,12 +16,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('./Components/Background.png');
+  ;
 }
 .wrapper {
   width: 420px;
-  background: yellowgreen;
-  color: #fff; 
+  background: #fff;
+  color: darkgreen; 
 }
 .wrapper h1{
   font-size: 36px;
@@ -39,14 +39,14 @@ body {
   background: transparent;
   border: none;
   outline: none;
-  border: 2px solid rgba(92, 179, 11, 0.486);
+  border: 2px solid rgba(88, 163, 18, 0.486);
   border-radius: 40px;
   font-size: 16px;
-  color: #fff;
+  color: #000000;
 
 }
 .input-box input::placeholder {
-  color: #fff;
+  color: #000000;
 }
 .input-box .icon {
   position: absolute;
