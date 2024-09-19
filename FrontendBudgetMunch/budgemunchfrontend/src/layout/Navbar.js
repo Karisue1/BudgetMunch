@@ -9,8 +9,8 @@ export default function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success" style={{ fontFamily: 'Leckerli One' }}>
   <div className="container-fluid">
-    <img src="/logo small.png" alt="BudgetMunch Logo" width="100" height="100" className="d-inline-block align-text-top" />
-      <a className="navbar-brand" style={{ fontSize: '75px'}} href="#">BudgetMunch</a>
+  <Link className='navbar-logo' to='/'>  <img src="/logo small.png" alt="BudgetMunch Logo" width="100" height="100" className="d-inline-block align-text-top" /></Link>
+     <Link className='navbar-budgetmunch' to='/'> <a className="navbar-brand" style={{ fontSize: '75px'}} href="#">BudgetMunch</a></Link>
         <Link className= "btn navbar-toggler" to="/favorites"
                 type="button"
                 data-bs-toggle="collapse"
