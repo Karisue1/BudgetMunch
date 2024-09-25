@@ -4,14 +4,14 @@ import axios from "axios";
 export default function Home() {
   const [restaurants, setRestaurants] = useState([])
 
-  useEffect(() => {
-    loadRestaurants();
-  }, []);
+ // useEffect(() => {
+  //  loadRestaurants();
+ // }, []);
 
-  const loadRestaurants = async () => {
-    const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation");
-    setRestaurants(result.data);
-  }
+ // const loadRestaurants = async () => {
+  //  const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation");
+ //   setRestaurants(result.data);
+ // }
 
   return (
     <div className="container">

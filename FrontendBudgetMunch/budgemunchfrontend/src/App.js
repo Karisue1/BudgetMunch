@@ -11,26 +11,24 @@ import { FavoritesPage } from './pages/FavoritesPage';
 import { NotesDetailPage } from './pages/NoteDetailPage'; 
 import { NotFoundPage }  from './pages/NotFoundPage';
 
-
 function App() {
   return (
-    <div className="App">
-
-
-    <Navbar></Navbar>
-    <br></br>
-      <ul>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/notes/:id" element={<NotesDetailPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </ul>
-
-
-    </div>
+    <><div className='NavagatingBar'>
+        <Navbar />
+    </div><div className="App">
+        <br></br>
+        <ul>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/notes/:id" element={<NotesDetailPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </ul>
+      </div></>
   );
 }
+  
+
 
 export default App;
