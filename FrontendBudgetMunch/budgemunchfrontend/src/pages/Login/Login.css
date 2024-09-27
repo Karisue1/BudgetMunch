@@ -58,7 +58,7 @@ body {
 
 }
 .input-box input::placeholder {
-  color: #000000;
+  color: #00000050;
 }
 .input-box .icon {
   position: absolute;
@@ -67,7 +67,8 @@ body {
   transform: translateY(50%);
   font-size: 10px;
 }
-/* Ensure the login form is centered on the screen */
-
-
-/* Adjust input styles here as needed */
+.required-field::after{
+  content:"*";
+  color: red;
+  float:right;
+}
