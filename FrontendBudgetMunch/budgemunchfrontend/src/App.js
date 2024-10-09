@@ -5,6 +5,7 @@ import Navbar from './layout/Navbar';
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login/Login'; 
+
 import { FavoritesPage } from './pages/FavoritesPage';
 import { NotesDetailPage } from './pages/NoteDetailPage'; 
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -18,7 +19,7 @@ function App() {
       <ul>
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/login" element={<Login />}/>
+          <Route path="/login" element={<Login />}/> 
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/notes/:id" element={<NotesDetailPage />} />
           <Route path="*" element={<NotFoundPage />} />
