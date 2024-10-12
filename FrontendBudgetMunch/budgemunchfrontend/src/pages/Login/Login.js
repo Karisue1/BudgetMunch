@@ -7,7 +7,7 @@ import axios from "axios";
 
 const Login = () => {
     const [showRegistrationForm, setShowRegistrationForm] = useState(false);  // Manage form visibility state
-    
+
     const [user, setUser]= useState({
         name: "",
         username: "",
@@ -16,10 +16,23 @@ const Login = () => {
     });
 
     const { name, username, email, password } = user;
-
     const onInputChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
+
+    const[userNameExists, setUserNameExists]= useState(false);
+    const checkUsername = async (username) =>{
+        if(username){
+            try{
+                const response = await axios.get("http://localhost:8080/api/v1/budget/check-username/${username}");
+                setUserNameExists(response.data);
+            }catch(error){
+                console.error("Error checking username", error);
+            }
+        }else{
+            setUserNameExists(false);
+        }
+    }
 
     const openRegistrationForm = () => {
         setShowRegistrationForm(true);
@@ -31,12 +44,11 @@ const Login = () => {
 
     let navigate = useNavigate();
 
-    const onSubmit = async (e) => {
+    const onSubmitRegister = async (e) => {
         e.preventDefault();
-    
         const userData = {
-            customerName: name,  // Match this to the 'customerName' field in the backend
-            userName: username,  // Match this to the 'userName' field in the backend
+            customerName: name,  // Matches to the 'customerName' field in the backend
+            userName: username,  // Matches to the 'userName' field in the backend
             email,
             password,
         };
@@ -57,11 +69,32 @@ const Login = () => {
         }
     };
 
+    const [error, setError] = useState("");
+    const onSubmitLogin = async (e) => {
+        e.preventDefault();
+
+        const loginData = {userName:username, password};
+
+        try{
+            const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginData);
+            if(response.status == 200){
+                navigate("/");
+            }
+        }catch(error){
+            console.error("Login failed!", error);
+            setError("Invalid username or password.");
+        }
+    };
+
     return (
         <div className="login-container">  {/* Flex container for centering */}
             {!showRegistrationForm ? (
                 <div className='wrapper'>  {/* Wrapper for the form content */}
-                    <form action="">
+                     
+                     {error && <div class="alert alert-danger" role="alert">
+                            {error}
+                            </div>} 
+                    <form onSubmit={onSubmitLogin}>
                         <h1>Login</h1>
                         <div className="input-box">
                             <input 
@@ -82,6 +115,8 @@ const Login = () => {
                                 onChange={onInputChange}
                             />
                             <RiLockPasswordFill className="icon" />
+                           
+                            <br/>
                             <a href="#">Forgot password?</a>
                         </div>
                         <div className="forgot-password">
@@ -97,7 +132,7 @@ const Login = () => {
             ) : (
                 <div className="registrationForm">
                     <div className='wrapper'>  {/* Wrapper for the form content */}
-                        <form onSubmit={onSubmit}>
+                        <form onSubmit={onSubmitRegister}>
                             <h1>Register</h1>
                             <div className="input-box">
                                 <input 
@@ -122,14 +157,17 @@ const Login = () => {
                             </div>
 
                             <div className="input-box">
-                                <input 
-                                    type="text" 
-                                    placeholder='Username'
-                                    name="username"
-                                    value={username} 
-                                    onChange={onInputChange} 
-                                    required 
-                                />
+                            <input 
+                                type="text" 
+                                placeholder='Username'
+                                name="username"
+                                value={username} 
+                                onChange={(e) => {
+                                    onInputChange(e); // Update user state
+                                    checkUsername(e.target.value); // Check if username exists
+                                }} 
+                                required 
+                            />
                             </div>
 
                             <div className="input-box">
