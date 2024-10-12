@@ -7,32 +7,56 @@ import axios from "axios";
 
 const Login = () => {
     const [showRegistrationForm, setShowRegistrationForm] = useState(false);  // Manage form visibility state
+    const [error, setError] = useState("");
+    const [registrationError, setRegistrationError] = useState("");
+    const [userNameExists, setUserNameExists] = useState(false);
 
-    const [user, setUser]= useState({
+    // State for login form
+    const [loginData, setLoginData] = useState({
+        username: "",
+        password: ""
+    });
+
+    // State for registration form
+    const [registrationData, setRegistrationData] = useState({
         name: "",
         username: "",
         email: "",
         password: ""
     });
 
-    const { name, username, email, password } = user;
-    const onInputChange = (e) => {
-        setUser({ ...user, [e.target.name]: e.target.value });
+    // Destructure loginData and registrationData
+    const { username: loginUsername, password: loginPassword } = loginData;
+    const { name, username: regUsername, email, password: regPassword } = registrationData;
+
+    // Handle input changes for login and registration forms
+    const handleLoginChange = (e) => {
+        setLoginData({ ...loginData, [e.target.name]: e.target.value });
     };
 
-    const[userNameExists, setUserNameExists]= useState(false);
-    const checkUsername = async (username) =>{
-        if(username){
-            try{
-                const response = await axios.get("http://localhost:8080/api/v1/budget/check-username/${username}");
-                setUserNameExists(response.data);
-            }catch(error){
+    const handleRegistrationChange = (e) => {
+        setRegistrationData({ ...registrationData, [e.target.name]: e.target.value });
+    };
+
+    const checkUsername = async (username) => {
+        if (username) {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/v1/budget/check-username/${username}`);
+                if (response.data === true) {
+                    setUserNameExists(true);
+                    setRegistrationError("Username already exists");
+                } else {
+                    setUserNameExists(false);
+                    setRegistrationError("");
+                }
+            } catch (error) {
                 console.error("Error checking username", error);
             }
-        }else{
+        } else {
             setUserNameExists(false);
+            setRegistrationError("");
         }
-    }
+    };
 
     const openRegistrationForm = () => {
         setShowRegistrationForm(true);
@@ -44,43 +68,55 @@ const Login = () => {
 
     let navigate = useNavigate();
 
+    // Registration form submission handler
     const onSubmitRegister = async (e) => {
         e.preventDefault();
         const userData = {
             customerName: name,  // Matches to the 'customerName' field in the backend
-            userName: username,  // Matches to the 'userName' field in the backend
+            userName: regUsername,  // Matches to the 'userName' field in the backend
             email,
-            password,
+            password: regPassword,
         };
-    
+
         try {
             await axios.post("http://localhost:8080/api/v1/budget/register", userData);
-            // After successful registration, navigate to the login page
-            setUser({//resets the registration form fields for a new user to use it
-                name:"",
-                username:"",
-                email:"",
-                password:""
-            })
+            // Reset the registration form fields after successful registration
+            setRegistrationData({
+                name: "",
+                username: "",
+                email: "",
+                password: ""
+            });
+            setRegistrationError(""); // Clear any registration error message
             setShowRegistrationForm(false); // Optionally close the registration form
             navigate("/login"); // Redirect to the login page
         } catch (error) {
-            console.error("There was an error registering the user!", error);
+            if (error.response && error.response.status === 409) {
+                setRegistrationError("Username already exists. Please choose a different one.");
+            } else {
+                console.error("There was an error registering the user!", error);
+                setRegistrationError("An error occurred. Please try again.");
+            }
         }
     };
 
-    const [error, setError] = useState("");
+    // Login form submission handler
     const onSubmitLogin = async (e) => {
         e.preventDefault();
+        const loginUserData = { userName: loginUsername, password: loginPassword };
 
-        const loginData = {userName:username, password};
-
-        try{
-            const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginData);
-            if(response.status == 200){
-                navigate("/");
+        try {
+            const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginUserData);
+            if (response.status === 200) {
+                // Reset the login form fields after successful login
+                setLoginData({
+                    username: "",
+                    password: ""
+                });
+                setError(""); // Clear any login error message
+                navigate("/"); // Redirect to the home page
             }
-        }catch(error){
+        } catch (error) {
             console.error("Login failed!", error);
             setError("Invalid username or password.");
         }
@@ -90,38 +126,36 @@ const Login = () => {
         <div className="login-container">  {/* Flex container for centering */}
             {!showRegistrationForm ? (
                 <div className='wrapper'>  {/* Wrapper for the form content */}
-                     
-                     {error && <div class="alert alert-danger" role="alert">
-                            {error}
-                            </div>} 
+                    {error && <div className="alert alert-danger" role="alert">{error}</div>}
                     <form onSubmit={onSubmitLogin}>
                         <h1>Login</h1>
                         <div className="input-box">
-                            <input 
-                                type="text" 
-                                name="username" 
-                                placeholder='Username' 
-                                required 
-                                onChange={onInputChange}
+                            <input
+                                type="text"
+                                name="username"
+                                value={loginUsername}
+                                placeholder='Username'
+                                required
+                                onChange={handleLoginChange}
                             />
                             <FaUserGraduate className="icon" />
                         </div>
                         <div className="input-box">
-                            <input 
-                                type="password" 
-                                name="password" 
-                                placeholder='Password' 
-                                required 
-                                onChange={onInputChange}
+                            <input
+                                type="password"
+                                name="password"
+                                value={loginPassword}
+                                placeholder='Password'
+                                required
+                                onChange={handleLoginChange}
                             />
                             <RiLockPasswordFill className="icon" />
-                           
-                            <br/>
+                            <br />
                             <a href="#">Forgot password?</a>
                         </div>
                         <div className="forgot-password">
                             <label><input type="checkbox" />Remember me</label>
-                            <br/>
+                            <br />
                         </div>
                         <button type="submit" className="btn btn-warning">Login</button>
                         <div className='register-link'>
@@ -131,60 +165,54 @@ const Login = () => {
                 </div>
             ) : (
                 <div className="registrationForm">
+                    {registrationError && <div className="alert alert-danger" role="alert">{registrationError}</div>}
                     <div className='wrapper'>  {/* Wrapper for the form content */}
                         <form onSubmit={onSubmitRegister}>
                             <h1>Register</h1>
                             <div className="input-box">
-                                <input 
+                                <input
                                     type="text"
                                     placeholder='Name'
                                     name="name"
-                                    value={name} 
-                                    onChange={onInputChange}
-                                    required 
+                                    value={name}
+                                    onChange={handleRegistrationChange}
+                                    required
                                 />
                             </div>
-                            
                             <div className="input-box">
-                                <input 
-                                    type="email" 
+                                <input
+                                    type="email"
                                     placeholder='Email'
                                     name="email"
-                                    value={email} 
-                                    onChange={onInputChange}
-                                    required 
+                                    value={email}
+                                    onChange={handleRegistrationChange}
+                                    required
                                 />
                             </div>
-
                             <div className="input-box">
-                            <input 
-                                type="text" 
-                                placeholder='Username'
-                                name="username"
-                                value={username} 
-                                onChange={(e) => {
-                                    onInputChange(e); // Update user state
-                                    checkUsername(e.target.value); // Check if username exists
-                                }} 
-                                required 
-                            />
+                                <input
+                                    type="text"
+                                    placeholder='Username'
+                                    name="username"
+                                    value={regUsername}
+                                    onChange={(e) => {
+                                        handleRegistrationChange(e); // Update registration state
+                                        checkUsername(e.target.value); // Check if username exists
+                                    }}
+                                    required
+                                />
                             </div>
-
                             <div className="input-box">
-                                <input 
-                                    type="password" 
-                                    placeholder='Password' 
+                                <input
+                                    type="password"
+                                    placeholder='Password'
                                     name="password"
-                                    value={password} 
-                                    onChange={onInputChange} 
-                                    required 
+                                    value={regPassword}
+                                    onChange={handleRegistrationChange}
+                                    required
                                 />
                             </div>
-                            
-                            <button 
-                                type="submit"
-                                className="btn btn-outline-primary"
-                            >Complete Registration</button>
+                            <button type="submit" className="btn btn-outline-primary">Complete Registration</button>
                             <div className='register-link'>
                                 <p>Already have an account? <a href="#" onClick={openLoginForm}>Login here</a></p>
                             </div>
@@ -194,6 +222,6 @@ const Login = () => {
             )}
         </div>
     );
-}
+};
 
 export default Login;
