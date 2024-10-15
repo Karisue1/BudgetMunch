@@ -19,3 +19,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.login {
+  background: url(./pages/Login/Components/Looks\ like\ the\ page\ got\ lost\,\ let\'s\ see\ if\ that\ can\ be\ fixed!.png);
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
+} 
+.home {
+  background: url(./pages/Login/Components/Background.png);
+  
+}
