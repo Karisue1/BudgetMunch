@@ -1,6 +1,9 @@
 import './NotFoundPage.css';
+import React, { Component } from "react";
 
 export const NotFoundPage = () => {
+    
+    
     return (
         <>
         <h1>How did you get here?</h1>

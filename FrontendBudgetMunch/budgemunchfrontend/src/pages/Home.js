@@ -23,14 +23,22 @@ export default function Home() {
       <h1>Restaurants Near Me</h1>
       <div className="py-4">
 
-      <input
-      type= "text"
-      className='address-input'
-      placeHolder='Input Your Address...'
-      name='address'  
-      />
+      <label>Adress:</label>
+            <input
+                type="Address"
+                required
+                />
+            <label>City</label>
+            <input
+                type="City"
+                required/>
+            <label>State</label>
+            <input
+                type="State"
+                required/>  
+            <button>Submit</button>      
 
-
+            <br />
 
         {/* Search Bar Input */}
         <input
