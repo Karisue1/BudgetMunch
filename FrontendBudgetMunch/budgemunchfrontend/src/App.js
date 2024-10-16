@@ -4,38 +4,31 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Navbar from './layout/Navbar';
 import Home from './pages/Home';
 import { AppRoutes } from './Routes';
-import { Link, Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Login from './pages/Login/Login'; 
 import { Routes, Route } from 'react-router-dom';
 import { FavoritesPage } from './pages/FavoritesPage';
-import { NotesDetailPage } from './pages/Details/NoteDetailPage'; 
+import { NotesDetailPage } from './pages/NoteDetailPage'; 
 import { NotFoundPage }  from './pages/NotFoundPage';
 
 function App() {
   return (
-    <Router>
-      <div className='NavigatingBar'>
+    <><div className='NavagatingBar'>
         <Navbar />
-      </div>
-      <div className="App">
+    </div><div className="App">
+        <br></br>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          
-          <li><Link to="/login">Login</Link></li>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/notes/:id" element={<NotesDetailPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </ul>
-
-        {/* Define your routes here */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
-    </Router>
+      </div></>
   );
 }
-
+  
 
 
 export default App;
- 
