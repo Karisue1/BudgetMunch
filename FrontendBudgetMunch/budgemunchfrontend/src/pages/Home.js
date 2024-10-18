@@ -1,38 +1,92 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 
 export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
   const [search, setSearch] = useState('');
+  const [address, setAddress] = useState({
+    streetAddress: "",
+    city: "",
+    state: ""
+  });
 
   const onInputChange = (e) => {
     setSearch(e.target.value);
   };
 
-  useEffect(() => {
-    loadRestaurants();
-  }, []);
+  const onInputChangeAddress = (e) => {
+    setAddress({ ...address, [e.target.name]: e.target.value });
+  };
 
+  // Address Submission Logic
+  const onSubmitAddress = async (e) => {
+    e.preventDefault();
+    
+    try {
+        // Post the address to your backend
+        await axios.post("http://localhost:8080/api/v1/budget/address", address);
+        console.log("Address submitted successfully");
+
+        // After the address is submitted, call the restaurant API
+        loadRestaurants();
+        
+    } catch (error) {
+       console.error("There was an error submitting the address", error);
+    }
+  };
+
+  // Fetch Restaurants Logic
   const loadRestaurants = async () => {
-    const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation");
-    setRestaurants(result.data);
+    try {
+      // Pass the address in the request to get the location-based restaurant data
+      const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation", {
+        params: {
+          address: `${address.streetAddress}, ${address.city}, ${address.state}`
+        }
+      });
+      console.log("Restaurant data fetched:", result.data);
+      setRestaurants(result.data); // Set the restaurants data
+
+    } catch (error) {
+      console.error("Error fetching restaurant data:", error.response);
+    }
   };
 
   return (
     <div className="container">
       <h1>Restaurants Near Me</h1>
       <div className="py-4">
+        {/* Address Form */}
+        <form onSubmit={onSubmitAddress}>
+          <label>Address:</label>
+          <input
+            type="text"
+            name="streetAddress"
+            value={address.streetAddress}
+            onChange={onInputChangeAddress}
+            required
+          />
+          <label>City</label>
+          <input
+            type="text"
+            name="city"
+            value={address.city}
+            onChange={onInputChangeAddress}
+            required
+          />
+          <label>State</label>
+          <input
+            type="text"
+            name="state"
+            value={address.state}
+            onChange={onInputChangeAddress}
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+        <br />
 
-      <input
-      type= "text"
-      className='address-input'
-      placeHolder='Input Your Address...'
-      name='address'  
-      />
-
-
-
-        {/* Search Bar Input */}
+        {/* Search Bar */}
         <input
           type="text"
           className='form-control'
@@ -42,6 +96,7 @@ export default function Home() {
         />
         <br />
 
+        {/* Restaurant Table */}
         <table className="table table-bordered shadow">
           <thead>
             <tr>
