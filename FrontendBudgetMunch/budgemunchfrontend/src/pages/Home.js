@@ -7,7 +7,8 @@ export default function Home() {
   const [address, setAddress] = useState({
     streetAddress: "",
     city: "",
-    state: ""
+    state: "",
+    budget:""
   });
 
   const onInputChange = (e) => {
@@ -41,7 +42,7 @@ export default function Home() {
       // Pass the address in the request to get the location-based restaurant data
       const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation", {
         params: {
-          address: `${address.streetAddress}, ${address.city}, ${address.state}`
+          address: `${address.streetAddress}, ${address.city}, ${address.state},${address.budget}`
         }
       });
       console.log("Restaurant data fetched:", result.data);
@@ -79,6 +80,14 @@ export default function Home() {
             type="text"
             name="state"
             value={address.state}
+            onChange={onInputChangeAddress}
+            required
+          />
+          <label>Budget</label>
+          <input
+            type="text"
+            name="budget"
+            value={address.budget}
             onChange={onInputChangeAddress}
             required
           />
