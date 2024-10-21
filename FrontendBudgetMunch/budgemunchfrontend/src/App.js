@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login/Login'; 
 
 import { FavoritesPage } from './pages/FavoritesPage';
-import { NotesDetailPage } from './pages/NoteDetailPage'; 
+import { NotesDetailPage } from './pages/Profile'; 
 import { NotFoundPage } from './pages/NotFoundPage';
 
 
@@ -21,7 +21,6 @@ function App() {
           <Route path="/" element={<Home />}/>
           <Route path="/login" element={<Login />}/> 
           <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/notes/:id" element={<NotesDetailPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </ul>

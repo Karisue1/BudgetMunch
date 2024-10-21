@@ -1,7 +1,7 @@
 import Home from "./Home"
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import './notedetails.css';
+
 export const NotesDetailPage = () => {
     const [restaurants, setRestaurants] = useState([])
 
