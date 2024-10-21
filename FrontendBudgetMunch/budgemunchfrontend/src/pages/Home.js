@@ -40,15 +40,8 @@ export default function Home() {
 
             <br />
 
-        {/* Search Bar Input */}
-        <input
-          type="text"
-          className='form-control'
-          placeholder='Search Table...'
-          name="search"
-          onChange={onInputChange}
-        />
-        <br />
+      
+        
 
         <table className="table table-bordered shadow">
           <thead>
