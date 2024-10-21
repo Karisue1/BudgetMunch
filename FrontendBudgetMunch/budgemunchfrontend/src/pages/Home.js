@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 
+// TODO: CUSTOM CURSOR FOR THE  WEBSITE (Food cursor): https://youtu.be/eCnq2LHNy3E?si=V1_8GZ5zXJJZ1TCe
 export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
   const [search, setSearch] = useState('');
@@ -42,7 +43,10 @@ export default function Home() {
       // Pass the address in the request to get the location-based restaurant data
       const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation", {
         params: {
-          address: `${address.streetAddress}, ${address.city}, ${address.state},${address.budget}`
+          //Concatenating the address -> gets called in the getGeoLocation of the backend
+          address: `${address.streetAddress}, ${address.city}, ${address.state},${address.budget}`,
+          //This budget parameter gets called in the @RequestParam of the backend getGeoLocation
+          budget: address.budget
         }
       });
       console.log("Restaurant data fetched:", result.data);
@@ -52,6 +56,7 @@ export default function Home() {
       console.error("Error fetching restaurant data:", error.response);
     }
   };
+  
 
   return (
     <div className="container">
@@ -91,7 +96,7 @@ export default function Home() {
             onChange={onInputChangeAddress}
             required
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Submit</button> 
         </form>
         <br />
 
