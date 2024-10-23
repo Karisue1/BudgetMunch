@@ -6,6 +6,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   font-family: "Bona Nova SC", serif ;
@@ -14,29 +15,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: url(./Components/budgetmunch\ \(4\).png)no-repeat;
-  background-size: cover;
-  background-position: center;
-  
-  
-}
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: top;
-  min-height: 10vh;
-  background: transparent;
- 
-  
+  background-image: url(./Components/budgetmunch\ \(4\).png);
+  ;
 }
 .login-container {
-  width: 420px;
-  backdrop-filter: blur(30px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  background: #fff;
   color: darkgreen;
   border-radius: 10px;
-  padding: 30px 40px; 
-  
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
 .wrapper h1{
   font-size: 36px;
@@ -44,7 +44,7 @@ body {
 }
 .wrapper .input-box {
   position: relative;
-  margin-bottom: 20px; width: 100%;
+  width: 100%;
   height: 50px;
   margin: 30px 0;
 }
@@ -52,35 +52,26 @@ body {
   width: 100%;
   height: 100%;
   background: transparent;
+  border: none;
   outline: none;
-  border: 2px solid rgba(7, 94, 22, 0.685);
-  border-radius: 30px;
-  font-size: 15px;
+  border: 2px solid rgba(88, 163, 18, 0.486);
+  border-radius: 40px;
+  font-size: 16px;
   color: #000000;
-  padding: 10px 40px 10px 15px;
+
 }
 .input-box input::placeholder {
-  color: #000000;
+  color: #00000050;
 }
 .input-box .icon {
   position: absolute;
-  right: 15 px;
-  top: 50%;
-  transform: translateY(50%);
-  font-size: 20px;
-  pointer-events: none;
+  right: 200 px;
+  top: 100;
+  transform: translateY(-50%);
+  font-size: 10px;
 }
-button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-top: 20px;
-  background-color: darkgreen;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: green;
+.required-field::after{
+  content:"*";
+  color: red;
+  float:right;
 }
