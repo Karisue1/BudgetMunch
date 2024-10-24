@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import axios from "axios";
 
 // TODO: CUSTOM CURSOR FOR THE  WEBSITE (Food cursor): https://youtu.be/eCnq2LHNy3E?si=V1_8GZ5zXJJZ1TCe
-//TODO: FIX the check for invalid address: add API logic
+//TODO: FIX the check for invalid address: add API logic, 
+//IF the first part of the address, is blank on api call, then return error
+//if street number and route is Empty, then maybe put a default address, maybe an alert
 
 export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
@@ -15,6 +17,7 @@ export default function Home() {
   });
   const [addressError, setAddressError] = useState(""); 
   const [budgetError, setBudgetError] = useState("");   
+  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
 
   // Input change handler for the address form
   const onInputChangeAddress = (e) => {
@@ -40,6 +43,7 @@ export default function Home() {
     // Check if the budget is valid
     if (!isValidBudget(address.budget)) {
       setBudgetError("Please enter a valid budget greater than zero.");
+      return
     }
 
     try {
@@ -82,6 +86,40 @@ export default function Home() {
       return [];
     }
   };
+
+  // Sorting logic: key -> columnName, direction -> asc, desc 
+  const handleSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+
+    // Sorting restaurants based on key and direction
+    const sortedData = [...restaurants].sort((a, b) => {
+      if (a[key] < b[key]) {
+        return direction === 'ascending' ? -1 : 1;
+      }
+      if (a[key] > b[key]) {
+        return direction === 'ascending' ? 1 : -1;
+      }
+      return 0;
+    });
+    setRestaurants(sortedData);
+  };
+
+  // Function to render sort arrow based on current state
+  const renderSortArrow = (key) => {
+    if (sortConfig.key === key) {
+      if (sortConfig.direction === 'ascending') {
+        return ' ↑'; // Up arrow for ascending
+      } else {
+        return ' ↓'; // Down arrow for descending
+      }
+    }
+    return ' ↕'; // Neutral arrow if not sorted yet
+  };
+
 
   return (
     <div className="container">
@@ -145,11 +183,32 @@ export default function Home() {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Vicinity</th>
-              <th scope="col">Rating</th>
-              <th scope="col">Price Level</th>
-            </tr>
+              <th scope="col">Name
+                <button onClick={() => handleSort('name')} className="sortable-button">
+                  {sortConfig.key === 'name' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
+                </button>
+              </th>
+
+              <th scope="col">Vicinity
+                <button onClick={() => handleSort('vicinity')} className="sortable-button">
+                  {sortConfig.key === 'vicinity' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
+                </button>
+              </th>
+
+              <th scope="col">Rating
+                <button onClick={() => handleSort('rating')} className="sortable-button">
+                  {sortConfig.key === 'rating' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
+                </button>
+              </th>
+
+              <th scope="col">Price Range per Person
+                <button onClick={() => handleSort('price_level')} className="sortable-button">
+                  {sortConfig.key === 'price_level' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
+                </button>
+              </th>
+
+
+              </tr>
           </thead>
           <tbody>
             {restaurants.filter(restaurant => {
