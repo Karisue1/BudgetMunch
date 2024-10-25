@@ -180,35 +180,42 @@ export default function Home() {
 
         {/* Restaurant Table */}
         <table className="table table-bordered shadow">
-          <thead>
+        <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Name
-                <button onClick={() => handleSort('name')} className="sortable-button">
-                  {sortConfig.key === 'name' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
-                </button>
+              <th scope="col">
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <span style={{ marginRight: '10px' }}>Name</span>
+                  <button onClick={() => handleSort('name')} type="button" className="btn btn-success btn-sm">
+                    {sortConfig.key === 'name' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
+                  </button>
+                </div>
               </th>
-
-              <th scope="col">Vicinity
-                <button onClick={() => handleSort('vicinity')} className="sortable-button">
-                  {sortConfig.key === 'vicinity' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
-                </button>
+              <th scope="col">
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <span style={{ marginRight: '10px' }}>Vicinity</span>
+                  <button onClick={() => handleSort('vicinity')} type="button" className="btn btn-success btn-sm">
+                    {sortConfig.key === 'vicinity' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
+                  </button>
+                </div>
               </th>
-
-              <th scope="col">Rating
-                <button onClick={() => handleSort('rating')} className="sortable-button">
-                  {sortConfig.key === 'rating' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
-                </button>
+              <th scope="col">
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <span style={{ marginRight: '10px' }}>Rating</span>
+                  <button onClick={() => handleSort('rating')} type="button" className="btn btn-success btn-sm">
+                    {sortConfig.key === 'rating' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
+                  </button>
+                </div>
               </th>
-
-              <th scope="col">Price Range per Person
-                <button onClick={() => handleSort('price_level')} className="sortable-button">
-                  {sortConfig.key === 'price_level' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
-                </button>
+              <th scope="col">
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <span style={{ marginRight: '10px' }}>Price Range per Person</span>
+                  <button onClick={() => handleSort('price_level')} type="button" className="btn btn-success btn-sm">
+                    {sortConfig.key === 'price_level' && sortConfig.direction === 'ascending' ? '↑' : '↓'}
+                  </button>
+                </div>
               </th>
-
-
-              </tr>
+            </tr>
           </thead>
           <tbody>
             {restaurants.filter(restaurant => {
