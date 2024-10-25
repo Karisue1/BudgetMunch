@@ -15,20 +15,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   justify-content: center;
   align-items: center;
-  background-image: url(./Components/budgetmunch\ \(4\).png);
   ;
 }
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
 }
 
 .wrapper {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   max-width: 420px;
@@ -67,7 +64,7 @@ body {
   position: absolute;
   right: 200 px;
   top: 100;
-  transform: translateY(-50%);
+  transform: translateY(50%);
   font-size: 10px;
 }
 .required-field::after{

@@ -4,21 +4,22 @@ import notfoundImage from './Login/Components/notfound.png';
 
 export const NotFoundPage = () => {
     return (
-        
-            <div className='not-found-page' style={{backgroundImage: `url(${notfoundImage})`,
-                
-                backgroundSize: 'cover',   
-                backgroundPosition: 'center',  
-                height: '90vh',    
-                width: '90vw',     
-                display: 'flex',    
-                flexDirection: 'column',
-                alignItems: 'top',
-                color: '#000000'     
+        <div className='not-found-page' style={{
+            backgroundImage: `url(${notfoundImage})`,
+            backgroundSize: 'cover',   
+            backgroundPosition: 'center',  
+            backgroundRepeat: 'no-repeat',
+            backgroundBlendMode: 'overlay',
+            height: '100vh',    
+            width: '100vw',     
+            display: 'flex',    
+            flexDirection: 'column',
+            alignItems: 'top',
+            color: '#000000'     
             }}> 
-            <h1>How did you get here?</h1>
-                <p>This page doesn't exist!! What went wrong?</p>
-            </div>
-        
+        <h1>How did you get here?</h1>
+            <p>This page doesn't exist!! What went wrong?</p>
+        </div>
+            
     )
 }
