@@ -1,6 +1,6 @@
 import Home from "./Home"
 
-export const FavoritesPage = () => {
+export const AboutUs = () => {
     return (
         <h1>Introduction</h1>
         

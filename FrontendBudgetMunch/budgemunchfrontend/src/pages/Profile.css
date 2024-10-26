@@ -1,7 +1,7 @@
 .profile-container{
   display:flex;
   justify-content: center;
-  align-items: center;
+  align-items: top;
   min-height: 100vh; 
 }
 .profile{
@@ -9,23 +9,22 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 800px;
-  height: 90vh;
+  width: 700px;
+  height: 80vh;
   display:flex;
   flex-direction: column;
-  padding:  0px;
+  padding:  40px;
   align-items: center;
-
 }
 img{
   width: 100px;
   height: 100px;
   border-radius: 100%;
-  margin: 0 auto;
+  margin: 1 auto;
 }
 h1{
   text-align: center;
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: bold;
   padding: 10px 0;
 }
@@ -35,9 +34,9 @@ hr{
 body {
   margin: 0;
   text-align: left;
-  font-size: 2rem;
+  font-size: 1.3rem;
   font-family: "Leckerli One", cursive, "Bona Nova SC", serif;
-  font-weight: 800;
+  font-weight: 600;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

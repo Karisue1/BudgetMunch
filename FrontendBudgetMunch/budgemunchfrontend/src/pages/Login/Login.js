@@ -127,19 +127,8 @@ const Login = () => {
     };
 
     return (
-        <><div className='login-page' style={{
-            backgroundImage: `url(${loginimage})`,
-            backgroundSize: 'cover',   
-            backgroundPosition: 'center',  
-            backgroundRepeat: 'no-repeat',
-            backgroundBlendMode: 'overlay',
-            height: '100vh',    
-            width: '100vw',     
-            display: 'flex',    
-            flexDirection: 'column',
-            alignItems: 'top',
-            color: '#000000'     
-            }}> 
+        <div className='login-container'>
+           
         {!showRegistrationForm ? (
                 <div className='wrapper'>  {/* Wrapper for the form content */}
                     {error && <div className="alert alert-danger" role="alert">{error}</div>}
@@ -237,7 +226,7 @@ const Login = () => {
                 </div>
             )}
         </div>
-    </>
+    
     )
 }
 
