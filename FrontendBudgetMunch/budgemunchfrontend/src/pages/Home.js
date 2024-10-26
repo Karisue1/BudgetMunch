@@ -149,6 +149,7 @@ export default function Home() {
               <th scope="col">Vicinity</th>
               <th scope="col">Rating</th>
               <th scope="col">Price Level</th>
+              <th scope="col">Add to Favorites</th>
             </tr>
           </thead>
           <tbody>
