@@ -7,7 +7,9 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import { IoToggle } from "react-icons/io5";
 import { IoHomeSharp } from "react-icons/io5";
 import { IoLogInSharp } from "react-icons/io5";
-import { FaFaceGrinHearts } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa6";
+import { IoBookOutline } from "react-icons/io5";
+
 
 export const Sidebar = [
     {
@@ -31,8 +33,13 @@ export const Sidebar = [
     {
         title:'Favorites',
         path: '/favorites',
-        icon: <FaFaceGrinHearts size={50}/>,
+        icon: <FaHeart size={50}/>,
         cName: 'nav-text'
     },
-
+    {
+        title:'About Us',
+        path: '/about-us',
+        icon: <IoBookOutline size={50}/>,
+        cName: 'nav-text'
+    },
 ]

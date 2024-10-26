@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Leckerli+One&display=swap');
 
 .navbar {
-    background-color: green;
+    background-color:#659a05;
     height: 130px;
     display: flex;
     justify-content: space-between;
@@ -32,7 +32,7 @@ ul li{
 
 }
 .nav-menu{
-    background-color:green;
+    background-color: #e4b157;
     width:250px;
     height: 100vh;
     display: flex;
@@ -72,7 +72,7 @@ ul li{
     border-radius:4px;
 }
 .nav-text a:hover{
-    background-color: chocolate;
+    background-color: #2A697A;
 }
 .nav-menu-items {
     width:100%;

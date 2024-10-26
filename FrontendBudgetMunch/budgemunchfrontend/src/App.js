@@ -9,11 +9,12 @@ import Login from './pages/Login/Login';
 import { FavoritesPage } from './pages/FavoritesPage';
 import Profile from './pages/Profile'; 
 import { NotFoundPage } from './pages/NotFoundPage';
+import { AboutUs } from './pages/AboutUs';
 
 
 function App() {
   const [theme, setTheme] = useState('light');
-  
+
   return (
     <><div class name='navbar'>
       <Navbar/>
@@ -27,6 +28,7 @@ function App() {
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path="/about-us" element={<AboutUs />} />
           </Routes>
         </ul>
       </div></>
