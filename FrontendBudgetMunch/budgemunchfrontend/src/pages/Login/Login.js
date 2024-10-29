@@ -213,6 +213,7 @@ const Login = () => {
                                 />
                             </div>
                             <button type="submit" className="btn btn-outline-primary">Complete Registration</button>
+                            
                             <div className='register-link'>
                                 <p>Already have an account? <a href="#" onClick={openLoginForm}>Login here</a></p>
                             </div>
