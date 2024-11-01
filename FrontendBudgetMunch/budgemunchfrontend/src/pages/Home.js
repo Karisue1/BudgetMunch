@@ -135,7 +135,7 @@ export default function Home() {
             <label>City:</label>
             <input
               type="text"
-              className="form-control me-2"
+              className="form-control me-3"
               name="city"
               placeholder="City"
               value={address.city}
@@ -157,15 +157,15 @@ export default function Home() {
             <label>Budget:</label>
             <input
               type="text"
-              className="form-control me-2"
+              className="form-control me-3"
               name="budget"
               placeholder="Budget"
               value={address.budget}
               onChange={onInputChangeAddress}
               required
             />
-            <button type="submit" className="btn btn-success me-2">Submit</button>
-            <button type="button" className="btn btn-success " onClick={clearFields}>Clear</button>
+            <button type="submit" className="btn btn-success me-3">Submit</button>
+            <button type="button" className="btn btn-danger " onClick={clearFields}>Clear</button>
           </div>
         </form>
 

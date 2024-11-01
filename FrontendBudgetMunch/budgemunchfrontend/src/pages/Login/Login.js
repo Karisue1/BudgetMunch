@@ -207,7 +207,7 @@ const Login = () => {
                                     type="password"
                                     placeholder='Password'
                                     name="password"
-                                    value={regPassword}
+                                    vThalue={regPassword}
                                     onChange={handleRegistrationChange}
                                     required
                                 />
