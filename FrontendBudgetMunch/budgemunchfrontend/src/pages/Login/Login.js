@@ -9,6 +9,7 @@ const Login = () => {
     const [showRegistrationForm, setShowRegistrationForm] = useState(false);  // Manage form visibility state
     const [error, setError] = useState("");
     const [registrationError, setRegistrationError] = useState("");
+    const [emailError, setEmailError] = useState("");
     const [userNameExists, setUserNameExists] = useState(false);
 
     // State for login form
@@ -55,6 +56,26 @@ const Login = () => {
         } else {
             setUserNameExists(false);
             setRegistrationError("");
+        }
+    };
+
+    const checkEmail = async (email) => {
+        if (email) {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/v1/budget/check-email/${email}`);
+                if (response.data === true) {
+                    setUserNameExists(true);
+                    setEmailError("email already exists");
+                } else {
+                    setUserNameExists(false);
+                    setEmailError("");
+                }
+            } catch (error) {
+                console.error("Error checking email", error);
+            }
+        } else {
+            setUserNameExists(false);
+            setEmailError("");
         }
     };
 
@@ -185,8 +206,12 @@ const Login = () => {
                                     placeholder='Email'
                                     name="email"
                                     value={email}
-                                    onChange={handleRegistrationChange}
+                                    onChange={(e) =>{ 
+                                    handleRegistrationChange(e);
+                                    checkEmail(e.target.value);
+                                    }}
                                     required
+                    
                                 />
                             </div>
                             <div className="input-box">
