@@ -6,11 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 const Login = () => {
-    const [showRegistrationForm, setShowRegistrationForm] = useState(false);  // Manage form visibility state
+    const [showRegistrationForm, setShowRegistrationForm] = useState(false);
     const [error, setError] = useState("");
-    const [registrationError, setRegistrationError] = useState("");
-    const [emailError, setEmailError] = useState("");
-    const [userNameExists, setUserNameExists] = useState(false);
+    const [emailError, setEmailError] = useState("");  // Separate error state for email
+    const [userNameError, setUserNameError] = useState("");  // Separate error state for username
 
     // State for login form
     const [loginData, setLoginData] = useState({
@@ -26,11 +25,9 @@ const Login = () => {
         password: ""
     });
 
-    // Destructure loginData and registrationData
     const { username: loginUsername, password: loginPassword } = loginData;
     const { name, username: regUsername, email, password: regPassword } = registrationData;
 
-    // Handle input changes for login and registration forms
     const handleLoginChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
     };
@@ -39,43 +36,37 @@ const Login = () => {
         setRegistrationData({ ...registrationData, [e.target.name]: e.target.value });
     };
 
-    const checkUsername = async (username) => {
-        if (username) {
-            try {
-                const response = await axios.get(`http://localhost:8080/api/v1/budget/check-username/${username}`);
-                if (response.data === true) {
-                    setUserNameExists(true);
-                    setRegistrationError("Username already exists");
-                } else {
-                    setUserNameExists(false);
-                    setRegistrationError("");
-                }
-            } catch (error) {
-                console.error("Error checking username", error);
-            }
-        } else {
-            setUserNameExists(false);
-            setRegistrationError("");
-        }
-    };
-
     const checkEmail = async (email) => {
         if (email) {
             try {
                 const response = await axios.get(`http://localhost:8080/api/v1/budget/check-email/${email}`);
                 if (response.data === true) {
-                    setUserNameExists(false);
-                    setEmailError("Email already exists");
+                    setEmailError("Email already exists."); // Set email error
                 } else {
-                    setUserNameExists(false);
-                    setEmailError("");
+                    setEmailError(""); // Clear email error if email doesn't exist
                 }
             } catch (error) {
                 console.error("Error checking email", error);
             }
         } else {
-            setUserNameExists(false);
-            setEmailError("");
+            setEmailError(""); // Clear error if no email is provided
+        }
+    };
+
+    const checkUsername = async (username) => {
+        if (username) {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/v1/budget/check-username/${username}`);
+                if (response.data === true) {
+                    setUserNameError("Username already exists."); // Set username error
+                } else {
+                    setUserNameError(""); // Clear username error if username doesn't exist
+                }
+            } catch (error) {
+                console.error("Error checking username", error);
+            }
+        } else {
+            setUserNameError(""); // Clear error if no username is provided
         }
     };
 
@@ -89,39 +80,51 @@ const Login = () => {
 
     let navigate = useNavigate();
 
-    // Registration form submission handler
     const onSubmitRegister = async (e) => {
         e.preventDefault();
+        
+        // Reset errors before checking registration
+        setEmailError("");
+        setUserNameError("");
+    
         const userData = {
-            customerName: name,  // Matches to the 'customerName' field in the backend
-            userName: regUsername,  // Matches to the 'userName' field in the backend
+            customerName: name,
+            userName: regUsername,
             email,
             password: regPassword,
         };
-
+    
         try {
             await axios.post("http://localhost:8080/api/v1/budget/register", userData);
-            // Reset the registration form fields after successful registration
             setRegistrationData({
                 name: "",
                 username: "",
                 email: "",
                 password: ""
             });
-            setRegistrationError(""); // Clear any registration error message
-            setShowRegistrationForm(false); // Optionally close the registration form
-            navigate("/login"); // Redirect to the login page
+            setShowRegistrationForm(false);
+            navigate("/login");
         } catch (error) {
-            if (error.response && error.response.status === 409) {
-                setRegistrationError("Username already exists. Please choose a different one.");
+            if (error.response) {
+                if (error.response.status === 409) {
+                    const errors = error.response.data;
+                    // Set specific errors for email and username if they exist in the response
+                    if (errors.includes("Email already exists")) {
+                        setEmailError("Email already exists.");
+                    }
+                    if (errors.includes("Username already exists")) {
+                        setUserNameError("Username already exists.");
+                    }
+                } else {
+                    setError("An error occurred. Please try again.");
+                }
             } else {
                 console.error("There was an error registering the user!", error);
-                setRegistrationError("An error occurred. Please try again.");
+                setError("An error occurred. Please try again.");
             }
         }
     };
 
-    // Login form submission handler
     const onSubmitLogin = async (e) => {
         e.preventDefault();
         const loginUserData = { userName: loginUsername, password: loginPassword };
@@ -129,12 +132,11 @@ const Login = () => {
         try {
             const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginUserData);
             if (response.status === 200) {
-                // Reset the login form fields after successful login
                 setLoginData({
                     username: "",
                     password: ""
                 });
-                setError(""); // Clear any login error message
+                setError("");
                 navigate("/"); // Redirect to the home page
             }
         } catch (error) {
@@ -144,9 +146,9 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">  {/* Flex container for centering */}
+        <div className="login-container">
             {!showRegistrationForm ? (
-                <div className='wrapper'>  {/* Wrapper for the form content */}
+                <div className='wrapper'>
                     {error && <div className="alert alert-danger" role="alert">{error}</div>}
                     <form onSubmit={onSubmitLogin}>
                         <h1>Login</h1>
@@ -186,8 +188,9 @@ const Login = () => {
                 </div>
             ) : (
                 <div className="registrationForm">
-                    {registrationError && <div className="alert alert-danger" role="alert">{registrationError}</div>}
-                    <div className='wrapper'>  {/* Wrapper for the form content */}
+                    {emailError && <div className="alert alert-danger" role="alert">{emailError}</div>}
+                    {userNameError && <div className="alert alert-danger" role="alert">{userNameError}</div>}
+                    <div className='wrapper'>
                         <form onSubmit={onSubmitRegister}>
                             <h1>Register</h1>
                             <div className="input-box">
@@ -206,12 +209,11 @@ const Login = () => {
                                     placeholder='Email'
                                     name="email"
                                     value={email}
-                                    onChange={(e) =>{ 
-                                    handleRegistrationChange(e);
-                                    checkEmail(e.target.value);
+                                    onChange={(e) => {
+                                        handleRegistrationChange(e);
+                                        checkEmail(e.target.value);
                                     }}
                                     required
-                    
                                 />
                             </div>
                             <div className="input-box">
@@ -221,8 +223,8 @@ const Login = () => {
                                     name="username"
                                     value={regUsername}
                                     onChange={(e) => {
-                                        handleRegistrationChange(e); // Update registration state
-                                        checkUsername(e.target.value); // Check if username exists
+                                        handleRegistrationChange(e);
+                                        checkUsername(e.target.value);
                                     }}
                                     required
                                 />
@@ -232,7 +234,7 @@ const Login = () => {
                                     type="password"
                                     placeholder='Password'
                                     name="password"
-                                    vThalue={regPassword}
+                                    value={regPassword}
                                     onChange={handleRegistrationChange}
                                     required
                                 />
