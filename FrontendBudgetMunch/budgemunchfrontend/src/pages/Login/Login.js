@@ -64,8 +64,8 @@ const Login = () => {
             try {
                 const response = await axios.get(`http://localhost:8080/api/v1/budget/check-email/${email}`);
                 if (response.data === true) {
-                    setUserNameExists(true);
-                    setEmailError("email already exists");
+                    setUserNameExists(false);
+                    setEmailError("Email already exists");
                 } else {
                     setUserNameExists(false);
                     setEmailError("");
