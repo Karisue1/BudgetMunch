@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './Login.css';  // Assuming you have already styled the Login form in Login.css
+import './ResetPassword.js'; 
 import { FaUserGraduate } from "react-icons/fa6";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
 
 const Login = () => {
@@ -10,6 +11,9 @@ const Login = () => {
     const [error, setError] = useState("");
     const [emailError, setEmailError] = useState("");  // Separate error state for email
     const [userNameError, setUserNameError] = useState("");  // Separate error state for username
+
+   
+
 
     // State for login form
     const [loginData, setLoginData] = useState({
@@ -52,6 +56,8 @@ const Login = () => {
             setEmailError(""); // Clear error if no email is provided
         }
     };
+
+    
 
     const checkUsername = async (username) => {
         if (username) {
@@ -173,14 +179,17 @@ const Login = () => {
                                 onChange={handleLoginChange}
                             />
                             <RiLockPasswordFill className="icon" />
-                            <br />
-                            <a href="#">Forgot password?</a>
                         </div>
-                        <div className="forgot-password">
-                            <label><input type="checkbox" />Remember me</label>
-                            <br />
-                        </div>
+
                         <button type="submit" className="btn btn-warning">Login</button>
+
+                        <div className="forgot-password">
+                        <br/>
+                        <Link className='forgot-password' to='/reset-password'> Forgot Password?</Link>
+                            {/* <label><input type="checkbox" />Remember me</label>
+                            <br /> */}
+                        </div>
+                        
                         <div className='register-link'>
                             <p>Don't have an account? <a href="#" onClick={openRegistrationForm}>Register now here</a></p>
                         </div>

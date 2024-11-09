@@ -9,6 +9,7 @@ import Login from './pages/Login/Login';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { NotesDetailPage } from './pages/NoteDetailPage'; 
 import { NotFoundPage } from './pages/NotFoundPage';
+import ResetPassword from './pages/Login/ResetPassword';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/login" element={<Login />}/> 
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/notes/:id" element={<NotesDetailPage />} />
+          <Route path="/reset-password" element={<ResetPassword/>}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </ul>
