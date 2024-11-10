@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import './Login.css';  // Assuming you have already styled the Login form in Login.css
-import { FaUserGraduate } from "react-icons/fa6";
-import { RiLockPasswordFill } from "react-icons/ri";
-import { useNavigate } from 'react-router-dom';
+import './ResetPassword.css';  
+import { BiShow, BiHide } from "react-icons/bi";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const ResetPassword = () => {
     
@@ -15,6 +14,8 @@ const ResetPassword = () => {
     const [showPasswordResetForm, setShowPasswordResetForm] = useState(false);
     const [firstNewPassword, setFirstNewPassword] = useState("");
     const [secondNewPassword, setSecondNewPassword] = useState("");
+    const [showFirstPassword, setShowFirstPassword] = useState(false);
+    const [showSecondPassword, setShowSecondPassword] = useState(false);
     
     const navigate = useNavigate();
 
@@ -95,6 +96,7 @@ const ResetPassword = () => {
                                 required 
                             />   
                         </div>
+                        <br/>
                         <button type="submit" className="btn btn-success">Send Email</button>
                     </form>
 
@@ -112,6 +114,8 @@ const ResetPassword = () => {
                                     required 
                                 />   
                             </div>
+                            <br/>
+                            <br/>
                             <button type="submit" className="btn btn-primary">Verify Code</button>
                         </form>
                     )}
@@ -121,24 +125,36 @@ const ResetPassword = () => {
                     <form onSubmit={onResetPassword}>
                         {emailError && <div className="alert alert-danger">{emailError}</div>}
                         {successMessage && <div className="alert alert-success">{successMessage}</div>}
-                        <div className="input-box">
+                        <div className="password-container">
                             <p>Enter new password</p>
-                            <input
-                                type="password"
-                                value={firstNewPassword}
-                                onChange={(e) => setFirstNewPassword(e.target.value)}
-                                placeholder="New password"
-                                required
-                            />
+                            <div className="input-with-icon">
+                                <input
+                                    type={showFirstPassword ? "text" : "password"}
+                                    value={firstNewPassword}
+                                    onChange={(e) => setFirstNewPassword(e.target.value)}
+                                    placeholder="New password"
+                                    required
+                                />
+                                <span onClick={() => setShowFirstPassword(!showFirstPassword)} className="eye-icon">
+                                    {showFirstPassword ? <BiHide /> : <BiShow />}
+                                </span>
+                            </div>
+                            <br/>
                             <p>Re-enter new password</p>
-                            <input
-                                type="password"
-                                value={secondNewPassword}
-                                onChange={(e) => setSecondNewPassword(e.target.value)}
-                                placeholder="Re-enter password"
-                                required
-                            />
+                            <div className="input-with-icon">
+                                <input
+                                    type={showSecondPassword ? "text" : "password"}
+                                    value={secondNewPassword}
+                                    onChange={(e) => setSecondNewPassword(e.target.value)}
+                                    placeholder="Re-enter password"
+                                    required
+                                />
+                                <span onClick={() => setShowSecondPassword(!showSecondPassword)} className="eye-icon">
+                                    {showSecondPassword ? <BiHide /> : <BiShow />}
+                                </span>
+                            </div>
                         </div>
+                        <br/><br/><br/><br/><br/><br/>
                         <button type="submit" className="btn btn-primary">Reset Password</button>
                     </form>
                 </div>
@@ -148,4 +164,3 @@ const ResetPassword = () => {
 };
 
 export default ResetPassword;
-

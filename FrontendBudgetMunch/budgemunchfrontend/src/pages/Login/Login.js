@@ -4,6 +4,7 @@ import './ResetPassword.js';
 import { FaUserGraduate } from "react-icons/fa6";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useNavigate, Link } from 'react-router-dom';
+import { BiShow, BiHide } from "react-icons/bi";
 import axios from "axios";
 
 const Login = () => {
@@ -11,10 +12,8 @@ const Login = () => {
     const [error, setError] = useState("");
     const [emailError, setEmailError] = useState("");  // Separate error state for email
     const [userNameError, setUserNameError] = useState("");  // Separate error state for username
-
+    const [showPassword, setShowPassword] = useState(false); //state to show password or not
    
-
-
     // State for login form
     const [loginData, setLoginData] = useState({
         username: "",
@@ -40,6 +39,11 @@ const Login = () => {
         setRegistrationData({ ...registrationData, [e.target.name]: e.target.value });
     };
 
+    //toggle to show password or not
+    const passwordVisibility = () => {
+        setShowPassword(!showPassword);
+    }
+
     const checkEmail = async (email) => {
         if (email) {
             try {
@@ -56,8 +60,6 @@ const Login = () => {
             setEmailError(""); // Clear error if no email is provided
         }
     };
-
-    
 
     const checkUsername = async (username) => {
         if (username) {
@@ -169,16 +171,21 @@ const Login = () => {
                             />
                             <FaUserGraduate className="icon" />
                         </div>
-                        <div className="input-box">
+
+                        <div class="password-container">
                             <input
-                                type="password"
+                                //this toggles between vis text & blocked out pass
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 value={loginPassword}
                                 placeholder='Password'
                                 required
                                 onChange={handleLoginChange}
                             />
-                            <RiLockPasswordFill className="icon" />
+                            <span onClick={passwordVisibility} className="eye-icon">
+                                {showPassword ? <BiHide /> : <BiShow />}
+                            </span>
+                            {/* <RiLockPasswordFill className="icon" /> */}
                         </div>
 
                         <button type="submit" className="btn btn-warning">Login</button>
@@ -238,15 +245,18 @@ const Login = () => {
                                     required
                                 />
                             </div>
-                            <div className="input-box">
+                            <div className="password-container">
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     placeholder='Password'
                                     name="password"
                                     value={regPassword}
                                     onChange={handleRegistrationChange}
                                     required
                                 />
+                                <span onClick={passwordVisibility} className="eye-icon">
+                                    {showPassword ? <BiHide /> : <BiShow />}
+                                </span>
                             </div>
                             <button type="submit" className="btn btn-outline-primary">Complete Registration</button>
                             
