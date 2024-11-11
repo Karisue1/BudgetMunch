@@ -18,11 +18,11 @@ const Profile = () => {
           <hr />
           <div className="Profile Info">
             <div className="user-info">
-              <IoPersonCircleSharp />Username: LuffyPirateKing
+              <IoPersonCircleSharp />Username: Username
               <br></br>
-              <IoMdPerson />Name: Monkey D Luffy
+              <IoMdPerson />Name: Name
               <br></br>            
-              <MdOutlineEmail />Email: Kingofthepirate@gmail.com
+              <MdOutlineEmail />Email: Email
               <br></br>
               <button to="/favorites" className="btn btn-warning"><FaHeart />  Favorites</button>
               <br></br><br></br>
