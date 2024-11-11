@@ -9,9 +9,14 @@ const ResetPassword = () => {
     //TODO: MUST FIX ISSUE OF USER CLICKING ON SEND EMAIL TWICE,
     //THE CODE PICKS UP the first code that was sent via e-mail and disregards the second one
 
+    //TODO: MUST FIX ERROR TO BE ON TOP OF THE VERIFY CODE
     
+    //---Error and Success Messages---
     const [emailError, setEmailError] = useState("");
+    const [codeError, setCodeError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    //---End of Error and Success Messages---
+
     const [email, setEmail] = useState("");
     const [showCodeInput, setShowCodeInput] = useState(false);
     const [code, setCode] = useState("");
@@ -20,6 +25,8 @@ const ResetPassword = () => {
     const [secondNewPassword, setSecondNewPassword] = useState("");
     const [showFirstPassword, setShowFirstPassword] = useState(false);
     const [showSecondPassword, setShowSecondPassword] = useState(false);
+    const [showEmailInput, setShowEmailInput] = useState(true);
+
     
     const navigate = useNavigate();
 
@@ -39,6 +46,7 @@ const ResetPassword = () => {
                 });
                 setSuccessMessage("E-mail verification sent successfully!");
                 setShowCodeInput(true);
+                setShowEmailInput(false);
             } else {
                 setEmailError("Email address does not exist within BudgetMunch.");
             }
@@ -51,6 +59,7 @@ const ResetPassword = () => {
         e.preventDefault();
         setEmailError("");
         setSuccessMessage("");
+        setCodeError("");
 
         try {
             await axios.post('http://localhost:8080/api/v1/budget/verify-code', null, {
@@ -59,7 +68,7 @@ const ResetPassword = () => {
             setSuccessMessage("Code verified successfully");
             setShowPasswordResetForm(true); // Show password reset form on successful code verification
         } catch (error) {
-            setEmailError("Invalid code.");
+            setCodeError("Invalid code.");
         }
     };
 
@@ -84,10 +93,26 @@ const ResetPassword = () => {
         }
     };
 
+    const onResendEmail = ()=>{
+        setShowCodeInput(false);
+        setShowEmailInput(true);
+        setSuccessMessage("");
+        setCode("");
+
+    }
+
+    function hideButton(x){
+        x.style.display='none';
+        
+    }
+
+
+
     return (
         <div className="login-container">
             {!showPasswordResetForm ? (
                 <div className="wrapper">
+                    {showEmailInput &&(
                     <form onSubmit={onSendEmail}>
                         <h1>Password Reset</h1>
                         {successMessage && <div className="alert alert-success">{successMessage}</div>}
@@ -104,12 +129,14 @@ const ResetPassword = () => {
                             />   
                         </div>
                         <br/>
-                        <button type="submit" className="btn btn-success">Send Email</button>
+                        <button id="myButton" type="submit" className="btn btn-success">Send Email</button>
                     </form>
+                    )}
 
                     {showCodeInput && (
                         <form onSubmit={onVerifyCode}>
                             <div className="input-box">
+                            {codeError && <div className="alert alert-danger">{codeError}</div>}
                                 <p>Please enter the 4-digit code sent to your email</p>
                                 <input
                                     type="text"
@@ -121,13 +148,13 @@ const ResetPassword = () => {
                                     required 
                                 />   
                             </div>
-                            <br/>
-                            <br/>
-                            <button type="submit" className="btn btn-primary">Verify Code</button>
+                            <br/><br/><br/>
+                            <button type="submit" className="btn btn-success me-3">Verify Code</button>
+                            <button type="button" className="btn btn-warning" onClick={onResendEmail}>Resubmit E-mail</button>
                         </form>
                     )}
                 </div>
-            ) : (
+                ) : (
                 <div className="wrapper">
                     <form onSubmit={onResetPassword}>
                         {emailError && <div className="alert alert-danger">{emailError}</div>}
