@@ -5,11 +5,12 @@ import Navbar from './layout/Navbar';
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login/Login'; 
-
+import { PrivateRoute } from './pages/PrivateRoute';
 import { FavoritesPage } from './pages/FavoritesPage';
 import Profile from './pages/Profile'; 
 import { NotFoundPage } from './pages/NotFoundPage';
 import { AboutUs } from './pages/AboutUs';
+import ResetPassword from './pages/Login/ResetPassword';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path="/reset-password" element={<ResetPassword/>}/>
             <Route path="/about-us" element={<AboutUs />} />
           </Routes>
         </ul>

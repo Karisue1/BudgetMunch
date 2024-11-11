@@ -1,20 +1,19 @@
-
-
-import loginimage from './Components/login.png';
 import React, { useState } from 'react';
 import './Login.css';  // Assuming you have already styled the Login form in Login.css
+import './ResetPassword.js'; 
 import { FaUserGraduate } from "react-icons/fa6";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { BiShow, BiHide } from "react-icons/bi";
 import axios from "axios";
 
-
 const Login = () => {
-    const [showRegistrationForm, setShowRegistrationForm] = useState(false);  // Manage form visibility state
+    const [showRegistrationForm, setShowRegistrationForm] = useState(false);
     const [error, setError] = useState("");
-    const [registrationError, setRegistrationError] = useState("");
-    const [userNameExists, setUserNameExists] = useState(false);
-
+    const [emailError, setEmailError] = useState("");  // Separate error state for email
+    const [userNameError, setUserNameError] = useState("");  // Separate error state for username
+    const [showPassword, setShowPassword] = useState(false); //state to show password or not
+   
     // State for login form
     const [loginData, setLoginData] = useState({
         username: "",
@@ -29,11 +28,9 @@ const Login = () => {
         password: ""
     });
 
-    // Destructure loginData and registrationData
     const { username: loginUsername, password: loginPassword } = loginData;
     const { name, username: regUsername, email, password: regPassword } = registrationData;
 
-    // Handle input changes for login and registration forms
     const handleLoginChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
     };
@@ -42,23 +39,42 @@ const Login = () => {
         setRegistrationData({ ...registrationData, [e.target.name]: e.target.value });
     };
 
+    //toggle to show password or not
+    const passwordVisibility = () => {
+        setShowPassword(!showPassword);
+    }
+
+    const checkEmail = async (email) => {
+        if (email) {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/v1/budget/check-email/${email}`);
+                if (response.data === true) {
+                    setEmailError("Email already exists."); // Set email error
+                } else {
+                    setEmailError(""); // Clear email error if email doesn't exist
+                }
+            } catch (error) {
+                console.error("Error checking email", error);
+            }
+        } else {
+            setEmailError(""); // Clear error if no email is provided
+        }
+    };
+
     const checkUsername = async (username) => {
         if (username) {
             try {
                 const response = await axios.get(`http://localhost:8080/api/v1/budget/check-username/${username}`);
                 if (response.data === true) {
-                    setUserNameExists(true);
-                    setRegistrationError("Username already exists");
+                    setUserNameError("Username already exists."); // Set username error
                 } else {
-                    setUserNameExists(false);
-                    setRegistrationError("");
+                    setUserNameError(""); // Clear username error if username doesn't exist
                 }
             } catch (error) {
                 console.error("Error checking username", error);
             }
         } else {
-            setUserNameExists(false);
-            setRegistrationError("");
+            setUserNameError(""); // Clear error if no username is provided
         }
     };
 
@@ -72,39 +88,51 @@ const Login = () => {
 
     let navigate = useNavigate();
 
-    // Registration form submission handler
     const onSubmitRegister = async (e) => {
         e.preventDefault();
+        
+        // Reset errors before checking registration
+        setEmailError("");
+        setUserNameError("");
+    
         const userData = {
-            customerName: name,  // Matches to the 'customerName' field in the backend
-            userName: regUsername,  // Matches to the 'userName' field in the backend
+            customerName: name,
+            userName: regUsername,
             email,
             password: regPassword,
         };
-
+    
         try {
             await axios.post("http://localhost:8080/api/v1/budget/register", userData);
-            // Reset the registration form fields after successful registration
             setRegistrationData({
                 name: "",
                 username: "",
                 email: "",
                 password: ""
             });
-            setRegistrationError(""); // Clear any registration error message
-            setShowRegistrationForm(false); // Optionally close the registration form
-            navigate("/login"); // Redirect to the login page
+            setShowRegistrationForm(false);
+            navigate("/login");
         } catch (error) {
-            if (error.response && error.response.status === 409) {
-                setRegistrationError("Username already exists. Please choose a different one.");
+            if (error.response) {
+                if (error.response.status === 409) {
+                    const errors = error.response.data;
+                    // Set specific errors for email and username if they exist in the response
+                    if (errors.includes("Email already exists")) {
+                        setEmailError("Email already exists.");
+                    }
+                    if (errors.includes("Username already exists")) {
+                        setUserNameError("Username already exists.");
+                    }
+                } else {
+                    setError("An error occurred. Please try again.");
+                }
             } else {
                 console.error("There was an error registering the user!", error);
-                setRegistrationError("An error occurred. Please try again.");
+                setError("An error occurred. Please try again.");
             }
         }
     };
 
-    // Login form submission handler
     const onSubmitLogin = async (e) => {
         e.preventDefault();
         const loginUserData = { userName: loginUsername, password: loginPassword };
@@ -112,12 +140,11 @@ const Login = () => {
         try {
             const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginUserData);
             if (response.status === 200) {
-                // Reset the login form fields after successful login
                 setLoginData({
                     username: "",
                     password: ""
                 });
-                setError(""); // Clear any login error message
+                setError("");
                 navigate("/"); // Redirect to the home page
             }
         } catch (error) {
@@ -127,10 +154,9 @@ const Login = () => {
     };
 
     return (
-        <div className='login-container'>
-           
-        {!showRegistrationForm ? (
-                <div className='wrapper'>  {/* Wrapper for the form content */}
+        <div className="login-container">
+            {!showRegistrationForm ? (
+                <div className='wrapper'>
                     {error && <div className="alert alert-danger" role="alert">{error}</div>}
                     <form onSubmit={onSubmitLogin}>
                         <h1>Login</h1>
@@ -145,24 +171,32 @@ const Login = () => {
                             />
                             <FaUserGraduate className="icon" />
                         </div>
-                        <div className="input-box">
+
+                        <div class="password-container">
                             <input
-                                type="password"
+                                //this toggles between vis text & blocked out pass
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 value={loginPassword}
                                 placeholder='Password'
                                 required
                                 onChange={handleLoginChange}
                             />
-                            <RiLockPasswordFill className="icon" />
-                            <br />
-                            <a href="#">Forgot password?</a>
+                            <span onClick={passwordVisibility} className="eye-icon">
+                                {showPassword ? <BiHide /> : <BiShow />}
+                            </span>
+                            {/* <RiLockPasswordFill className="icon" /> */}
                         </div>
-                        <div className="forgot-password">
-                            <label><input type="checkbox" />Remember me</label>
-                            <br />
-                        </div>
+
                         <button type="submit" className="btn btn-warning">Login</button>
+
+                        <div className="forgot-password">
+                        <br/>
+                        <Link className='forgot-password' to='/reset-password'> Forgot Password?</Link>
+                            {/* <label><input type="checkbox" />Remember me</label>
+                            <br /> */}
+                        </div>
+                        
                         <div className='register-link'>
                             <p>Don't have an account? <a href="#" onClick={openRegistrationForm}>Register now here</a></p>
                         </div>
@@ -170,8 +204,9 @@ const Login = () => {
                 </div>
             ) : (
                 <div className="registrationForm">
-                    {registrationError && <div className="alert alert-danger" role="alert">{registrationError}</div>}
-                    <div className='wrapper'>  {/* Wrapper for the form content */}
+                    {emailError && <div className="alert alert-danger" role="alert">{emailError}</div>}
+                    {userNameError && <div className="alert alert-danger" role="alert">{userNameError}</div>}
+                    <div className='wrapper'>
                         <form onSubmit={onSubmitRegister}>
                             <h1>Register</h1>
                             <div className="input-box">
@@ -190,7 +225,10 @@ const Login = () => {
                                     placeholder='Email'
                                     name="email"
                                     value={email}
-                                    onChange={handleRegistrationChange}
+                                    onChange={(e) => {
+                                        handleRegistrationChange(e);
+                                        checkEmail(e.target.value);
+                                    }}
                                     required
                                 />
                             </div>
@@ -201,23 +239,27 @@ const Login = () => {
                                     name="username"
                                     value={regUsername}
                                     onChange={(e) => {
-                                        handleRegistrationChange(e); // Update registration state
-                                        checkUsername(e.target.value); // Check if username exists
+                                        handleRegistrationChange(e);
+                                        checkUsername(e.target.value);
                                     }}
                                     required
                                 />
                             </div>
-                            <div className="input-box">
+                            <div className="password-container">
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     placeholder='Password'
                                     name="password"
                                     value={regPassword}
                                     onChange={handleRegistrationChange}
                                     required
                                 />
+                                <span onClick={passwordVisibility} className="eye-icon">
+                                    {showPassword ? <BiHide /> : <BiShow />}
+                                </span>
                             </div>
                             <button type="submit" className="btn btn-outline-primary">Complete Registration</button>
+                            
                             <div className='register-link'>
                                 <p>Already have an account? <a href="#" onClick={openLoginForm}>Login here</a></p>
                             </div>
@@ -226,8 +268,7 @@ const Login = () => {
                 </div>
             )}
         </div>
-    
-    )
-}
+    );
+};
 
 export default Login;

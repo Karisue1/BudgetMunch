@@ -24,7 +24,11 @@ const Profile = () => {
               <br></br>            
               <MdOutlineEmail />Email: Kingofthepirate@gmail.com
               <br></br>
-              <FaHeart /><Link to="/favorites">Favorites</Link>
+              <button to="/favorites" className="btn btn-warning"><FaHeart />  Favorites</button>
+              <br></br><br></br>
+              <button type="submit" className="btn btn-warning">
+                Log Out
+              </button>
             </div>
           </div>
 
