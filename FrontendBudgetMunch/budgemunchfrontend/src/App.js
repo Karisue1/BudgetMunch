@@ -26,8 +26,13 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/favorites" element={<FavoritesPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route 
+              path="/favorites" 
+              element={<PrivateRoute><FavoritesPage /></PrivateRoute>} />
+            <Route 
+              path="/profile" 
+              element={<PrivateRoute>< Profile /></PrivateRoute>} />
+            
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/reset-password" element={<ResetPassword/>}/>
             <Route path="/about-us" element={<AboutUs />} />
