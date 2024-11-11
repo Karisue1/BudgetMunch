@@ -5,6 +5,10 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 const ResetPassword = () => {
+
+    //TODO: MUST FIX ISSUE OF USER CLICKING ON SEND EMAIL TWICE,
+    //THE CODE PICKS UP the first code that was sent via e-mail and disregards the second one
+
     
     const [emailError, setEmailError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -20,9 +24,12 @@ const ResetPassword = () => {
     const navigate = useNavigate();
 
     const onSendEmail = async (e) => {
+        // prevents the form from actually submitting, giving you a chance
+        // to validate or process the input before submitting it to the server
+        // or updating the state of your React component. 
         e.preventDefault();
-        setEmailError("");
-        setSuccessMessage("");
+        setEmailError("");//resets the Email Error to be empty
+        setSuccessMessage("");//resets the success message to be empty
     
         try {
             const emailExistsResponse = await axios.get(`http://localhost:8080/api/v1/budget/check-email/${email}`);
