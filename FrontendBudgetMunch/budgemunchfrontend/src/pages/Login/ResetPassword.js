@@ -103,10 +103,7 @@ const ResetPassword = () => {
 
     function hideButton(x){
         x.style.display='none';
-        
     }
-
-
 
     return (
         <div className="login-container">
