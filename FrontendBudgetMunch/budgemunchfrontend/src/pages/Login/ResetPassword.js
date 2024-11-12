@@ -26,6 +26,7 @@ const ResetPassword = () => {
     const [showFirstPassword, setShowFirstPassword] = useState(false);
     const [showSecondPassword, setShowSecondPassword] = useState(false);
     const [showEmailInput, setShowEmailInput] = useState(true);
+    const [isSending, setIsSending] = useState(false);
 
     
     const navigate = useNavigate();
@@ -37,6 +38,7 @@ const ResetPassword = () => {
         e.preventDefault();
         setEmailError("");//resets the Email Error to be empty
         setSuccessMessage("");//resets the success message to be empty
+        setIsSending(true);
     
         try {
             const emailExistsResponse = await axios.get(`http://localhost:8080/api/v1/budget/check-email/${email}`);
@@ -52,6 +54,8 @@ const ResetPassword = () => {
             }
         } catch (error) {
             setEmailError("An error occurred. Please try again.");
+        }finally{
+            setIsSending(false);
         }
     };
 
@@ -101,9 +105,6 @@ const ResetPassword = () => {
 
     }
 
-    function hideButton(x){
-        x.style.display='none';
-    }
 
     return (
         <div className="login-container">
@@ -126,7 +127,11 @@ const ResetPassword = () => {
                             />   
                         </div>
                         <br/>
-                        <button id="myButton" type="submit" className="btn btn-success">Send Email</button>
+                        {isSending ? (
+                            <span>Sending...</span> // Display "Sending..." when isSending is true
+                            ) : (
+                                <button type="submit" className="btn btn-success">Send Email</button> // Show button when not sending
+                            )}
                     </form>
                     )}
 
@@ -146,8 +151,10 @@ const ResetPassword = () => {
                                 />   
                             </div>
                             <br/><br/><br/>
+                            <div className="input-box">
                             <button type="submit" className="btn btn-success me-3">Verify Code</button>
                             <button type="button" className="btn btn-warning" onClick={onResendEmail}>Resubmit E-mail</button>
+                            </div>
                         </form>
                     )}
                 </div>
@@ -155,7 +162,7 @@ const ResetPassword = () => {
                 <div className="wrapper">
                     <form onSubmit={onResetPassword}>
                         {emailError && <div className="alert alert-danger">{emailError}</div>}
-                        {successMessage && <div className="alert alert-success">{successMessage}</div>}
+                        {/* {successMessage && <div className="alert alert-success">{successMessage}</div>} */}
                         <div className="password-container">
                             <p>Enter new password</p>
                             <div className="input-with-icon">
