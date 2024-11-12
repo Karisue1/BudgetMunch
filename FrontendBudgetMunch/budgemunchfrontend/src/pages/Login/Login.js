@@ -136,13 +136,16 @@ const Login = () => {
     const onSubmitLogin = async (e) => {
         e.preventDefault();
         const loginUserData = { userName: loginUsername, password: loginPassword };
+        const [user, setUser] = useState({name: "", isAuthenticated: false})
+
 
         try {
             const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginUserData);
             if (response.status === 200) {
                 setLoginData({
                     username: "",
-                    password: ""
+                    password: "",
+                    isAuthenticated: true
                 });
                 setError("");
                 navigate("/"); // Redirect to the home page
