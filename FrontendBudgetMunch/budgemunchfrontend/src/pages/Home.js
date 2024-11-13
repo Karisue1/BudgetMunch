@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from "axios";
-
+import { FaHeartCirclePlus } from "react-icons/fa6";
 // TODO: CUSTOM CURSOR FOR THE  WEBSITE (Food cursor): https://youtu.be/eCnq2LHNy3E?si=V1_8GZ5zXJJZ1TCe
 //TODO: FIX the check for invalid address: add API logic
 
@@ -168,10 +168,19 @@ export default function Home() {
                 <td>{restaurant.vicinity}</td>
                 <td>{restaurant.rating}</td>
                 <td>{restaurant.price_level}</td>
+                <td> <button 
+                        type="button" 
+                        data-id="${restaurant.Favorite}" 
+                        class="favorite-btn btn btn-outline-info"
+                      >
+                        <FaHeartCirclePlus />
+                      </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+        
       </div>
     </div>
   );
