@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Login.css';  // Assuming you have already styled the Login form in Login.css
 import './ResetPassword.js'; 
 import { FaUserGraduate } from "react-icons/fa6";
@@ -132,23 +132,27 @@ const Login = () => {
             }
         }
     };
+  
+    useEffect(() => {
+        // Reset loginData fields when component unmounts or when switching forms
+        return () => {
+            setLoginData({
+                username: "",
+                password: ""
+            });
+        };
+    }, [showRegistrationForm]); // Re-run effect when form view changes
 
     const onSubmitLogin = async (e) => {
         e.preventDefault();
         const loginUserData = { userName: loginUsername, password: loginPassword };
-        const [user, setUser] = useState({name: "", isAuthenticated: false})
-
 
         try {
             const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginUserData);
             if (response.status === 200) {
-                setLoginData({
-                    username: "",
-                    password: "",
-                    isAuthenticated: true
-                });
-                setError("");
-                navigate("/"); // Redirect to the home page
+                setLoginData({ username: "", password: "" }); // Reset fields after successful login
+                setError(""); // Clear errors
+                navigate("/"); // Redirect to home page
             }
         } catch (error) {
             console.error("Login failed!", error);

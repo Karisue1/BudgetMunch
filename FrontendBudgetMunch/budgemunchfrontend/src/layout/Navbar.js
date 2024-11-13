@@ -17,7 +17,6 @@ export default function Navbar() {
   const showSidebar = () => setSidebar(!sidebar)
   
   return (
-    <>
     <IconContext.Provider value={{color: 'black'}}>
       <div>
       <div className="navbar">
@@ -30,13 +29,11 @@ export default function Navbar() {
         <li>
           <Link to="/" style={{textDecoration: 'none', color: 'black'}}>
           BudgetMunch
+          <img src={login} alt='logo'/>
           </Link>
         </li>
       </ul>
-      <Link to="/">
-      <img src={login} alt='logo'/>
-      </Link>
-
+    
 
 
       </div>

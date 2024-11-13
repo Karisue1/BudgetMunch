@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
   
 export const FavoritesPage = () => {
+
   const [restaurants, setRestaurants] = useState([]);
   const [search, setSearch] = useState('');
   const [address, setAddress] = useState({
