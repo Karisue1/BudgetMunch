@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from "axios";
 import './Home.css'; 
 
+// TODO: CUSTOM CURSOR FOR THE  WEBSITE (Food cursor): https://youtu.be/eCnq2LHNy3E?si=V1_8GZ5zXJJZ1TCe
+//TODO: FIX the check for invalid address: add API logic
+
 export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
   const [search, setSearch] = useState('');
@@ -50,6 +53,9 @@ export default function Home() {
     }
   };
 
+  //---End of Address Submission Logic---
+
+  // Fetch Restaurants Logic
   const loadRestaurants = async () => {
     try {
       const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation", {
@@ -113,6 +119,7 @@ export default function Home() {
       (restaurant.price_level && String(restaurant.price_level).toLowerCase().includes(searchLowerCase))
     );
   });
+
 
   return (
     <div className="container">
@@ -181,11 +188,14 @@ export default function Home() {
           name="search"
           onChange={(e) => setSearch(e.target.value)}
         />
-        
+
+        {/* Restaurant Table */}
+
         <table className="table table-bordered shadow">
           <thead className="head-style">
             <tr>
               <th scope="col">#</th>
+
               <th scope="col">
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <span style={{ marginRight: '10px' }}>Name</span>
@@ -213,11 +223,17 @@ export default function Home() {
               <th scope="col">
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <span style={{ marginRight: '10px' }}>Price Range per Person</span>
-                  <button onClick={() => handleSort('price_level')} type="button" className="btn btn-light btn-sm">
-                    {renderSortArrow('price_level')}
-                  </button>
                 </div>
               </th>
+                  //-----------Add to Favorites/Added Column------------  
+             <th scope="col">
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <span style={{ marginRight: '10px' }}>Add to Favorites</span>
+                <button onClick={() => handleSort('price_level')} type="button" className="btn btn-light btn-sm">
+                  {renderSortArrow('price_level')}
+                </button>
+              </div>
+            </th>               
             </tr>
           </thead>
           <tbody>
@@ -233,6 +249,14 @@ export default function Home() {
                   <td>{restaurant.vicinity}</td>
                   <td>{restaurant.rating}</td>
                   <td>{restaurant.price_level}</td>
+                 <td> <button 
+                        type="button" 
+                        data-id="${restaurant.Favorite}" 
+                        class="favorite-btn btn btn-outline-info"
+                      >
+                        <FaHeartCirclePlus />
+                      </button>
+                </td>
                 </tr>
               ))
             )}

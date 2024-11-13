@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, BrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App'; 
 import { FavoritesPage } from './pages/FavoritesPage';
-import { NotesDetailPage } from './pages/NoteDetailPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import Login from './pages/Login/Login';
 import reportWebVitals from './reportWebVitals';
@@ -15,7 +14,7 @@ const router = createBrowserRouter([ {
   element: <App />,
   children: [
     { path: "favorites", element: <FavoritesPage /> },
-    { path: "notes/:id", element: <NotesDetailPage /> },
+    
     { path: "*", element: <NotFoundPage /> },
   ],
 },{

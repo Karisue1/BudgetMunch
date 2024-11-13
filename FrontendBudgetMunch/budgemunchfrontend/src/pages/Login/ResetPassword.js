@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import './ResetPassword.css';  
 import { BiShow, BiHide } from "react-icons/bi";
@@ -8,7 +9,6 @@ const ResetPassword = () => {
 
     //TODO: MUST FIX ISSUE OF USER CLICKING ON SEND EMAIL TWICE,
     //THE CODE PICKS UP the first code that was sent via e-mail and disregards the second one
-
     //TODO: MUST FIX ERROR TO BE ON TOP OF THE VERIFY CODE
     
     //---Error and Success Messages---
@@ -16,7 +16,6 @@ const ResetPassword = () => {
     const [codeError, setCodeError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     //---End of Error and Success Messages---
-
     const [email, setEmail] = useState("");
     const [showCodeInput, setShowCodeInput] = useState(false);
     const [code, setCode] = useState("");
@@ -25,9 +24,9 @@ const ResetPassword = () => {
     const [secondNewPassword, setSecondNewPassword] = useState("");
     const [showFirstPassword, setShowFirstPassword] = useState(false);
     const [showSecondPassword, setShowSecondPassword] = useState(false);
+
     const [showEmailInput, setShowEmailInput] = useState(true);
     const [isSending, setIsSending] = useState(false);
-
     
     const navigate = useNavigate();
 
@@ -39,7 +38,7 @@ const ResetPassword = () => {
         setEmailError("");//resets the Email Error to be empty
         setSuccessMessage("");//resets the success message to be empty
         setIsSending(true);
-    
+
         try {
             const emailExistsResponse = await axios.get(`http://localhost:8080/api/v1/budget/check-email/${email}`);
             if (emailExistsResponse.data === true) {
@@ -49,6 +48,7 @@ const ResetPassword = () => {
                 setSuccessMessage("E-mail verification sent successfully!");
                 setShowCodeInput(true);
                 setShowEmailInput(false);
+
             } else {
                 setEmailError("Email address does not exist within BudgetMunch.");
             }
@@ -56,6 +56,7 @@ const ResetPassword = () => {
             setEmailError("An error occurred. Please try again.");
         }finally{
             setIsSending(false);
+
         }
     };
 
@@ -97,20 +98,20 @@ const ResetPassword = () => {
         }
     };
 
+
     const onResendEmail = ()=>{
         setShowCodeInput(false);
         setShowEmailInput(true);
         setSuccessMessage("");
         setCode("");
-
     }
-
 
     return (
         <div className="login-container">
             {!showPasswordResetForm ? (
                 <div className="wrapper">
                     {showEmailInput &&(
+
                     <form onSubmit={onSendEmail}>
                         <h1>Password Reset</h1>
                         {successMessage && <div className="alert alert-success">{successMessage}</div>}
@@ -163,6 +164,7 @@ const ResetPassword = () => {
                     <form onSubmit={onResetPassword}>
                         {emailError && <div className="alert alert-danger">{emailError}</div>}
                         {/* {successMessage && <div className="alert alert-success">{successMessage}</div>} */}
+
                         <div className="password-container">
                             <p>Enter new password</p>
                             <div className="input-with-icon">
@@ -201,4 +203,6 @@ const ResetPassword = () => {
     );
 };
 
+
 export default ResetPassword;
+

@@ -64,6 +64,7 @@ body {
   color: #000000;
 
 }
+
 /* -----Added this new css for the password container------- */
 
 /* Style the eye icon */
@@ -113,4 +114,6 @@ body {
   content:"*";
   color: red;
   float:right;
+
 }
+

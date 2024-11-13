@@ -132,7 +132,7 @@ const Login = () => {
             }
         }
     };
-
+  
     useEffect(() => {
         // Reset loginData fields when component unmounts or when switching forms
         return () => {

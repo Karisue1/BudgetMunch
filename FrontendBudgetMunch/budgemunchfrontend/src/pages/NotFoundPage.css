@@ -1,24 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Leckerli+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Leckerli+One&display=swap');
-
-
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
-  font-family: "Arima", system-ui,"Leckerli One", cursive, "Bona Nova SC", serif ;
-  font-weight: 300;
+  font-family: "Bona Nova SC", serif ;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+ 
+  background-size: cover;
+  background-position: center;
+  
   
 }
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.page-container{
+  display:flex;
+  justify-content: center;
+  align-items: top;
+  min-height: 100vh;
 }
