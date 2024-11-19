@@ -1,9 +1,13 @@
 import './Favoritespage.css';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import profileImage from './Login/Components/Profile icon.png';
+import { Link } from 'react-router-dom';
 import { FaHeartCirclePlus } from "react-icons/fa6";
+
   
 export const FavoritesPage = () => {
+
   const [restaurants, setRestaurants] = useState([]);
   const [search, setSearch] = useState('');
   const [address, setAddress] = useState({
@@ -84,51 +88,8 @@ export const FavoritesPage = () => {
 
   return (
     <div className="container">
-      <h1>Restaurants Near Me</h1>
-      <div className="py-4">
-        {/* Address Form */}
-        <form onSubmit={onSubmitAddress}>
-          <label>Address:</label>
-          <input
-            type="text"
-            name="streetAddress"
-            value={address.streetAddress}
-            onChange={onInputChangeAddress}
-            required
-          />
-          <label>City</label>
-          <input
-            type="text"
-            name="city"
-            value={address.city}
-            onChange={onInputChangeAddress}
-            required
-          />
-          <label>State</label>
-          <input
-            type="text"
-            name="state"
-            value={address.state}
-            onChange={onInputChangeAddress}
-            required
-          />
-          <label>Budget</label>
-          <input
-            type="text"
-            name="budget"
-            value={address.budget}
-            onChange={onInputChangeAddress}
-            required
-          />
-          <button type="submit">Submit</button> 
-        </form>
-
-        {/* Display both errors */}
-        {addressError && <p style={{ color: 'red' }}>{addressError}</p>}
-        {budgetError && <p style={{ color: 'red' }}>{budgetError}</p>}
-
-        <br />
-
+      <h1>Favorites</h1>
+      <div className="py-4">       
         {/* Search Bar */}
         <input
           type="text"
@@ -148,7 +109,9 @@ export const FavoritesPage = () => {
               <th scope="col">Vicinity</th>
               <th scope="col">Rating</th>
               <th scope="col">Price Level</th>
-              <th scope="col">Add to Favorites</th>
+
+              <th scope="col">Remove from Favorites</th>
+
             </tr>
           </thead>
           <tbody>
@@ -179,8 +142,11 @@ export const FavoritesPage = () => {
             ))}
           </tbody>
         </table>
-        
+
       </div>
     </div>
-  );
+  ); 
+  
+  
 }
+

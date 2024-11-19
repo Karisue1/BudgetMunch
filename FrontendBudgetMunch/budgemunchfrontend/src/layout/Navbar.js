@@ -4,7 +4,7 @@ import Login from '../pages/Login/Login';
 import { Route } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import { IoToggle } from "react-icons/io5";
+import { IoMenu } from "react-icons/io5";
 import { Sidebar } from './Sidebar';
 import './Navbar.css';
 import { IconContext } from 'react-icons/lib';
@@ -17,12 +17,11 @@ export default function Navbar() {
   const showSidebar = () => setSidebar(!sidebar)
   
   return (
-    <>
     <IconContext.Provider value={{color: 'black'}}>
       <div>
       <div className="navbar">
         <ul><Link to='#' className='menu-bars'>
-          <IoToggle onClick={showSidebar} size={70}/>
+          <IoMenu onClick={showSidebar} size={70}/>
         </Link>
        </ul>
       
@@ -31,14 +30,14 @@ export default function Navbar() {
           <Link to="/" style={{textDecoration: 'none', color: 'black'}}>
           BudgetMunch
           </Link>
+          <Link><img src={login} alt='logo'/></Link>
         </li>
       </ul>
-      <Link to="/">
-      <img src={login} alt='logo'/>
-      </Link>
-
-
-
+      <ul>
+        
+          <button to="/login" style={{textDecoration:'none', color: 'black'}}>Login</button>
+        
+      </ul>
       </div>
 
       {/*navbar sidebar*/}
@@ -62,6 +61,5 @@ export default function Navbar() {
         </nav>  
     </div>
     </IconContext.Provider>
-  </>
   )
 }
