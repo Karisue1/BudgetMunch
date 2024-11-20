@@ -15,7 +15,7 @@ import { AuthProvider } from './pages/Auth/AuthContext.js';
 function App() {
   return (
     <AuthProvider> {/* AuthProvider wraps the app without Router */}
-      <Router>
+      
         <div className='navbar'>
           <Navbar />
           <br />
@@ -33,7 +33,7 @@ function App() {
             <Route path="/about-us" element={<AboutUs />} />
           </Routes>
         </div>
-      </Router>
+      
     </AuthProvider>
   );
 }

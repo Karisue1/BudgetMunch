@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 
-import { FaHeartCirclePlus } from "react-icons/fa6";import './home.css'; 
+import { FaHeartCirclePlus } from "react-icons/fa6";import './Home.css'; 
 
 // TODO: CUSTOM CURSOR FOR THE  WEBSITE (Food cursor): https://youtu.be/eCnq2LHNy3E?si=V1_8GZ5zXJJZ1TCe
 //TODO: FIX the check for invalid address: add API logic
