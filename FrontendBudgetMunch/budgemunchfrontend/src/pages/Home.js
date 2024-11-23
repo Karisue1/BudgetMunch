@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import Navbar from '../layout/Navbar';
+
 
 import { FaHeartCirclePlus } from "react-icons/fa6";import './Home.css'; 
 
@@ -140,151 +142,148 @@ export default function Home() {
 
 
   return (
-    <div className="container">
-      <h1>Restaurants Near Me</h1>
-      <div className="py-4">
-        {/* Center the form using flexbox */}
-        <form onSubmit={onSubmitAddress} className="d-flex justify-content-center mb-3">
-          <div className="input-container d-flex">
-            <label>Address:</label>
-            <input
-              type="text"
-              className="form-control me-2"
-              name="streetAddress"
-              placeholder="Street Address"
-              value={address.streetAddress}
-              onChange={onInputChangeAddress}
-              required
-            />
+    <><div className='navebar'>
+      <Navbar />
+    </div><div className="container">
+        <h1>Restaurants Near Me</h1>
+        <div className="py-4">
+          {/* Center the form using flexbox */}
+          <form onSubmit={onSubmitAddress} className="d-flex justify-content-center mb-3">
+            <div className="input-container d-flex">
+              <label>Address:</label>
+              <input
+                type="text"
+                className="form-control me-2"
+                name="streetAddress"
+                placeholder="Street Address"
+                value={address.streetAddress}
+                onChange={onInputChangeAddress}
+                required />
 
-            <label>City:</label>
-            <input
-              type="text"
-              className="form-control me-2"
-              name="city"
-              placeholder="City"
-              value={address.city}
-              onChange={onInputChangeAddress}
-              required
-            />
+              <label>City:</label>
+              <input
+                type="text"
+                className="form-control me-2"
+                name="city"
+                placeholder="City"
+                value={address.city}
+                onChange={onInputChangeAddress}
+                required />
 
-            <label>State:</label>  
-            <input
-              type="text"
-              className="form-control me-2"
-              name="state"
-              placeholder="State"
-              value={address.state}
-              onChange={onInputChangeAddress}
-              required
-            />
+              <label>State:</label>
+              <input
+                type="text"
+                className="form-control me-2"
+                name="state"
+                placeholder="State"
+                value={address.state}
+                onChange={onInputChangeAddress}
+                required />
 
-            <label>Budget:</label>
-            <input
-              type="text"
-              className="form-control me-3"
-              name="budget"
-              placeholder="Budget"
-              value={address.budget}
-              onChange={onInputChangeAddress}
-              required
-            />
-            <button type="submit" className="btn btn-success me-2">Submit</button>
-            <button type="button" className="btn btn-danger " onClick={clearFields}>Clear</button>
-          </div>
-        </form>
+              <label>Budget:</label>
+              <input
+                type="text"
+                className="form-control me-3"
+                name="budget"
+                placeholder="Budget"
+                value={address.budget}
+                onChange={onInputChangeAddress}
+                required />
+              <button type="submit" className="btn btn-success me-2">Submit</button>
+              <button type="button" className="btn btn-danger " onClick={clearFields}>Clear</button>
+            </div>
+          </form>
 
-        {addressError && <p style={{ color: 'red' }}>{addressError}</p>}
-        {budgetError && <p style={{ color: 'red' }}>{budgetError}</p>}
+          {addressError && <p style={{ color: 'red' }}>{addressError}</p>}
+          {budgetError && <p style={{ color: 'red' }}>{budgetError}</p>}
 
-        <br />
+          <br />
 
-        <input
-          type="text"
-          className='form-control mb-3'
-          placeholder='Search Table...'
-          name="search"
-          onChange={(e) => setSearch(e.target.value)}
-        />
+          <input
+            type="text"
+            className='form-control mb-3'
+            placeholder='Search Table...'
+            name="search"
+            onChange={(e) => setSearch(e.target.value)} />
 
-        {/* Restaurant Table */}
+          {/* Restaurant Table */}
 
-        <table className="table table-bordered shadow">
-          <thead className="head-style">
-            <tr>
-              <th scope="col">#</th>
-
-              <th scope="col">
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <span style={{ marginRight: '10px' }}>Name</span>
-                  <button onClick={() => handleSort('name')} type="button" className="btn btn-light btn-sm">
-                    {renderSortArrow('name')}
-                  </button>
-                </div>
-              </th>
-              <th scope="col">
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <span style={{ marginRight: '10px' }}>Vicinity</span>
-                  <button onClick={() => handleSort('vicinity')} type="button" className="btn btn-light btn-sm">
-                    {renderSortArrow('vicinity')}
-                  </button>
-                </div>
-              </th>
-              <th scope="col">
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <span style={{ marginRight: '10px' }}>Rating</span>
-                  <button onClick={() => handleSort('rating')} type="button" className="btn btn-light btn-sm">
-                    {renderSortArrow('rating')}
-                  </button>
-                </div>
-              </th>
-              <th scope="col">
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <span style={{ marginRight: '10px' }}>Price Range per Person</span>
-                </div>
-              </th>
-              
-             <th scope="col">
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <span style={{ marginRight: '10px' }}>Add to Favorites</span>
-                <button onClick={() => handleSort('price_level')} type="button" className="btn btn-light btn-sm">
-                  {renderSortArrow('price_level')}
-                </button>
-              </div>
-            </th>               
-            </tr>
-          </thead>
-          <tbody>
-
-            {filteredRestaurants.length === 0 ? (
+          <table className="table table-bordered shadow">
+            <thead className="head-style">
               <tr>
-                <td colSpan="5" style={{ textAlign: 'center' }}>No results found</td>
+                <th scope="col">#</th>
 
+                <th scope="col">
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <span style={{ marginRight: '10px' }}>Name</span>
+                    <button onClick={() => handleSort('name')} type="button" className="btn btn-light btn-sm">
+                      {renderSortArrow('name')}
+                    </button>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <span style={{ marginRight: '10px' }}>Vicinity</span>
+                    <button onClick={() => handleSort('vicinity')} type="button" className="btn btn-light btn-sm">
+                      {renderSortArrow('vicinity')}
+                    </button>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <span style={{ marginRight: '10px' }}>Rating</span>
+                    <button onClick={() => handleSort('rating')} type="button" className="btn btn-light btn-sm">
+                      {renderSortArrow('rating')}
+                    </button>
+                  </div>
+                </th>
+                <th scope="col">
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <span style={{ marginRight: '10px' }}>Price Range per Person</span>
+                  </div>
+                </th>
+
+                <th scope="col">
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <span style={{ marginRight: '10px' }}>Add to Favorites</span>
+                    <button onClick={() => handleSort('price_level')} type="button" className="btn btn-light btn-sm">
+                      {renderSortArrow('price_level')}
+                    </button>
+                  </div>
+                </th>
               </tr>
-            ) : (
-              filteredRestaurants.map((restaurant, index) => (
-                <tr key={index}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{restaurant.name}</td>
-                  <td>{restaurant.vicinity}</td>
-                  <td>{restaurant.rating}</td>
-                  <td>{restaurant.price_level}</td>
-                  <td>
-  <button
-    onClick={() => handleAddResturant(restaurant)} // Passing the restaurant object
-    type="button"
-    className="favorite-btn btn btn-outline-info"
-  >
-    <FaHeartCirclePlus />
-  </button>
-</td>
+            </thead>
+            <tbody>
+
+              {filteredRestaurants.length === 0 ? (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: 'center' }}>No results found</td>
+
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-        
-      </div>
-    </div>
+              ) : (
+                filteredRestaurants.map((restaurant, index) => (
+                  <tr key={index}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{restaurant.name}</td>
+                    <td>{restaurant.vicinity}</td>
+                    <td>{restaurant.rating}</td>
+                    <td>{restaurant.price_level}</td>
+                    <td>
+                      <button
+                        onClick={() => handleAddResturant(restaurant)} // Passing the restaurant object
+                        type="button"
+                        className="favorite-btn btn btn-outline-info"
+                      >
+                        <FaHeartCirclePlus />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+
+        </div>
+      </div></>
   );
 }

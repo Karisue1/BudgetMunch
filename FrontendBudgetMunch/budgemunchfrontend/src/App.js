@@ -15,10 +15,9 @@ import ResetPassword from './pages/Login/ResetPassword';
 function App() {
   return (
     
-    <><div className='navbar'>
-    <Navbar></Navbar>
-  </div><div className='routes'>
+    <><div className='routes'>
       <Routes>
+        <Route path='/login' element={<Login/>}/>
         <Route path='/' element={<Home/>}/>
         <Route path='/favorites' element={<FavoritesPage/>}/>
         <Route path='/profile' element={<Profile/>}/>

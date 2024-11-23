@@ -13,7 +13,9 @@ import Navbar from '../layout/Navbar';
 const Profile = () => {
 
   return (
-    <><div className="profile-container">
+    <> <div className='navebar'>
+    <Navbar />
+</div><div className="profile-container">
         <div className="profile">
           <img src={profileImage} alt="Profile" />
           <h1>Profile</h1>

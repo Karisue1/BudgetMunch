@@ -5,7 +5,7 @@ import profileImage from './Login/Components/Profile icon.png';
 import { Link } from 'react-router-dom';
 import { FaHeartCirclePlus } from "react-icons/fa6";
 import Home from './Home';
-
+import Navbar from '../layout/Navbar';
   
 export const FavoritesPage = () => {
   const [search, setSearch] = useState('');
@@ -36,63 +36,64 @@ export const FavoritesPage = () => {
   
    
   return (
-    <div className="container">
-      <h1>Favorites</h1>
-      <div className="py-4">       
-        {/* Search Bar */}
-        <input
-          type="text"
-          className='form-control'
-          placeholder='Search Table...'
-          name="search"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <br />
+    <><div className='navebar'>
+      <Navbar />
+    </div><div className="container">
+        <h1>Favorites</h1>
+        <div className="py-4">
+          {/* Search Bar */}
+          <input
+            type="text"
+            className='form-control'
+            placeholder='Search Table...'
+            name="search"
+            onChange={(e) => setSearch(e.target.value)} />
+          <br />
 
-        {/* Restaurant Table */}
-        <table className="table table-bordered shadow">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Vicinity</th>
-              <th scope="col">Rating</th>
-              <th scope="col">Price Level</th>
+          {/* Restaurant Table */}
+          <table className="table table-bordered shadow">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Vicinity</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Price Level</th>
 
-              <th scope="col">Remove from Favorites</th>
+                <th scope="col">Remove from Favorites</th>
 
-            </tr>
-          </thead>
-          <tbody>
-            {restaurants.filter(restaurant => {
-              const searchLowerCase = search.toLowerCase();
-              return (
-                (restaurant.name && restaurant.name.toLowerCase().includes(searchLowerCase)) ||
-                (restaurant.vicinity && restaurant.vicinity.toLowerCase().includes(searchLowerCase)) ||
-                (restaurant.rating && String(restaurant.rating).toLowerCase().includes(searchLowerCase)) ||
-                (restaurant.price_level && String(restaurant.price_level).toLowerCase().includes(searchLowerCase))
-              );
-            }).map((restaurant, index) => (
-              <tr key={index}>
-                <th scope="row">{index + 1}</th>
-                <td>{restaurant.name}</td>
-                <td>{restaurant.vicinity}</td>
-                <td>{restaurant.rating}</td>
-                <td>{restaurant.price_level}</td>
-                <td> <button 
-                    onClick={() => handleRemoveFavorite(restaurant.id)} 
+              </tr>
+            </thead>
+            <tbody>
+              {restaurants.filter(restaurant => {
+                const searchLowerCase = search.toLowerCase();
+                return (
+                  (restaurant.name && restaurant.name.toLowerCase().includes(searchLowerCase)) ||
+                  (restaurant.vicinity && restaurant.vicinity.toLowerCase().includes(searchLowerCase)) ||
+                  (restaurant.rating && String(restaurant.rating).toLowerCase().includes(searchLowerCase)) ||
+                  (restaurant.price_level && String(restaurant.price_level).toLowerCase().includes(searchLowerCase))
+                );
+              }).map((restaurant, index) => (
+                <tr key={index}>
+                  <th scope="row">{index + 1}</th>
+                  <td>{restaurant.name}</td>
+                  <td>{restaurant.vicinity}</td>
+                  <td>{restaurant.rating}</td>
+                  <td>{restaurant.price_level}</td>
+                  <td> <button
+                    onClick={() => handleRemoveFavorite(restaurant.id)}
                     className="btn btn-danger btn-sm"
                   >
-                        <FaHeartCirclePlus />
-                      </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    <FaHeartCirclePlus />
+                  </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-      </div>
-    </div>
+        </div>
+      </div></>
   ); 
   
   
