@@ -151,6 +151,7 @@ const Login = () => {
         try {
             const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginUserData);
             if (response.status === 200) {
+                localStorage.setItem('user', JSON.stringify(response.data.user)); //temp fix for profile info
                 setLoginData({ username: "", password: "" }); // Reset fields after successful login
                 setError(""); // Clear errors
                 navigate("/profile"); // Redirect to profile page
