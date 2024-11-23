@@ -4,88 +4,37 @@ import axios from "axios";
 import profileImage from './Login/Components/Profile icon.png';
 import { Link } from 'react-router-dom';
 import { FaHeartCirclePlus } from "react-icons/fa6";
+import Home from './Home';
 
   
 export const FavoritesPage = () => {
-
-  const [restaurants, setRestaurants] = useState([]);
   const [search, setSearch] = useState('');
-  const [address, setAddress] = useState({
-    streetAddress: "",
-    city: "",
-    state: "",
-    budget: ""
-  });
-  const [addressError, setAddressError] = useState(""); 
-  const [budgetError, setBudgetError] = useState("");   
+  const [restaurants, setRestaurants] = useState([]);
 
-  // Input change handler for the address form
-  const onInputChangeAddress = (e) => {
-    setAddress({ ...address, [e.target.name]: e.target.value });
-    setAddressError(""); // Reset address error when user is typing
-    setBudgetError("");  // Reset budget error when user is typing
+  const [favorites, setFavorites] = useState([]);
+  
+  // Mock example of favorites (ideally fetched from local storage or state management)
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(storedFavorites);
+  }, []);
+
+  const handleRemoveFavorite = (restaurantId) => {
+    const updatedFavorites = favorites.filter(fav => fav.id !== restaurantId);
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
-
-  // Logic to check if budget is a digit and greater than zero
-  const isValidBudget = (budget) => {
-    const num = Number(budget);
-    return !isNaN(num) && num > 0;
-  };
-
-  // ---Address Submission Logic---
-  const onSubmitAddress = async (e) => {
-    e.preventDefault();
-
-    // Clear previous errors
-    setAddressError("");
-    setBudgetError("");
-
-    // Check if the budget is valid
-    if (!isValidBudget(address.budget)) {
-      setBudgetError("Please enter a valid budget greater than zero.");
-    }
-
-    try {
-      // Post the address to your backend
-      await axios.post("http://localhost:8080/api/v1/budget/address", address);
-      console.log("Address submitted successfully");
-
-      // After the address is submitted, call the restaurant API
-      const result = await loadRestaurants();
-
-      // If no restaurants are returned, set an address error
-      if (result.length === 0) {
-        setAddressError("Please enter a valid address.");
-      }
-    } catch (error) {
-      console.error("There was an error submitting the address", error);
-      setAddressError("Error submitting the address. Please try again.");
+  const handleAddResturant = (restaurant) => {
+    if (!favorites.find(fav => fav.id === restaurant.id)) {
+   
+      setFavorites([...favorites, restaurant]);
+    } else {
+      
+      console.log('This restaurant is already in your favorites.');
     }
   };
-  //---End of Address Submission Logic---
-
-  // Fetch Restaurants Logic
-  const loadRestaurants = async () => {
-    try {
-      // Pass the address in the request to get the location-based restaurant data
-      const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation", {
-        params: {
-          // Concatenating the address -> gets called in the getGeoLocation of the backend
-          address: `${address.streetAddress}, ${address.city}, ${address.state},${address.budget}`,
-          budget: address.budget
-        }
-      });
-      console.log("Restaurant data fetched:", result.data);
-      setRestaurants(result.data); // Set the restaurants data
-
-      return result.data; // Return restaurant data for validation
-    } catch (error) {
-      console.error("Error fetching restaurant data:", error.response);
-      setAddressError("Failed to fetch restaurant data. Please check the address and try again.");
-      return [];
-    }
-  };
-
+  
+   
   return (
     <div className="container">
       <h1>Favorites</h1>
@@ -131,10 +80,9 @@ export const FavoritesPage = () => {
                 <td>{restaurant.rating}</td>
                 <td>{restaurant.price_level}</td>
                 <td> <button 
-                        type="button" 
-                        data-id="${restaurant.Favorite}" 
-                        class="favorite-btn btn btn-outline-info"
-                      >
+                    onClick={() => handleRemoveFavorite(restaurant.id)} 
+                    className="btn btn-danger btn-sm"
+                  >
                         <FaHeartCirclePlus />
                       </button>
                 </td>
@@ -149,4 +97,83 @@ export const FavoritesPage = () => {
   
   
 }
+  
+//   const [restaurants, setRestaurants] = useState([]);
+//   const [search, setSearch] = useState('');
+//   const [address, setAddress] = useState({
+//     streetAddress: "",
+//     city: "",
+//     state: "",
+//     budget: ""
+//   });
+//   const [addressError, setAddressError] = useState(""); 
+//   const [budgetError, setBudgetError] = useState("");   
+
+//   // Input change handler for the address form
+//   const onInputChangeAddress = (e) => {
+//     setAddress({ ...address, [e.target.name]: e.target.value });
+//     setAddressError(""); // Reset address error when user is typing
+//     setBudgetError("");  // Reset budget error when user is typing
+//   };
+
+//   // Logic to check if budget is a digit and greater than zero
+//   const isValidBudget = (budget) => {
+//     const num = Number(budget);
+//     return !isNaN(num) && num > 0;
+//   };
+
+//   // ---Address Submission Logic---
+//   const onSubmitAddress = async (e) => {
+//     e.preventDefault();
+
+//     // Clear previous errors
+//     setAddressError("");
+//     setBudgetError("");
+
+//     // Check if the budget is valid
+//     if (!isValidBudget(address.budget)) {
+//       setBudgetError("Please enter a valid budget greater than zero.");
+//     }
+
+//     try {
+//       // Post the address to your backend
+//       await axios.post("http://localhost:8080/api/v1/budget/address", address);
+//       console.log("Address submitted successfully");
+
+//       // After the address is submitted, call the restaurant API
+//       const result = await loadRestaurants();
+
+//       // If no restaurants are returned, set an address error
+//       if (result.length === 0) {
+//         setAddressError("Please enter a valid address.");
+//       }
+//     } catch (error) {
+//       console.error("There was an error submitting the address", error);
+//       setAddressError("Error submitting the address. Please try again.");
+//     }
+//   };
+//   //---End of Address Submission Logic---
+
+//   // Fetch Restaurants Logic
+//   const loadRestaurants = async () => {
+//     try {
+//       // Pass the address in the request to get the location-based restaurant data
+//       const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation", {
+//         params: {
+//           // Concatenating the address -> gets called in the getGeoLocation of the backend
+//           address: `${address.streetAddress}, ${address.city}, ${address.state},${address.budget}`,
+//           budget: address.budget
+//         }
+//       });
+//       console.log("Restaurant data fetched:", result.data);
+//       setRestaurants(result.data); // Set the restaurants data
+
+//       return result.data; // Return restaurant data for validation
+//     } catch (error) {
+//       console.error("Error fetching restaurant data:", error.response);
+//       setAddressError("Failed to fetch restaurant data. Please check the address and try again.");
+//       return [];
+//     }
+//   };
+
 

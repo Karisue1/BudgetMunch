@@ -8,6 +8,8 @@ import { FaHeartCirclePlus } from "react-icons/fa6";import './Home.css';
 
 export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  
   const [search, setSearch] = useState('');
   const [address, setAddress] = useState({
     streetAddress: "",
@@ -18,7 +20,14 @@ export default function Home() {
   const [addressError, setAddressError] = useState(""); 
   const [budgetError, setBudgetError] = useState("");   
   const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
-
+  
+  // Function to add a restaurant to the list
+  const handleAddFavorite = (restaurant) => {
+    // Add restaurant to favorites if it's not already in the list
+    if (!favorites.some((fav) => fav.id === restaurant.id)) {
+      setFavorites([...favorites, restaurant]);
+    }
+  };
   const onInputChangeAddress = (e) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
     setAddressError(""); 
@@ -110,7 +119,15 @@ export default function Home() {
     });
     setRestaurants([]); // Clear the restaurants array
   };
-
+  const handleAddResturant = (restaurant) => {
+    // Check if the restaurant is already in the favorites list
+    if (!favorites.find(fav => fav.id === restaurant.id)) {
+      // Add the restaurant to the list
+      setFavorites([...favorites, restaurant]);
+    } else {
+      console.log("This restaurant is already in your favorites.");
+    }
+  };
   const filteredRestaurants = restaurants.filter(restaurant => {
     const searchLowerCase = search.toLowerCase();
     return (
@@ -252,14 +269,15 @@ export default function Home() {
                   <td>{restaurant.vicinity}</td>
                   <td>{restaurant.rating}</td>
                   <td>{restaurant.price_level}</td>
-                 <td> <button 
-                        type="button" 
-                        data-id="${restaurant.Favorite}" 
-                        class="favorite-btn btn btn-outline-info"
-                      >
-                        <FaHeartCirclePlus />
-                      </button>
-                </td>
+                  <td>
+  <button
+    onClick={() => handleAddResturant(restaurant)} // Passing the restaurant object
+    type="button"
+    className="favorite-btn btn btn-outline-info"
+  >
+    <FaHeartCirclePlus />
+  </button>
+</td>
                 </tr>
               ))
             )}

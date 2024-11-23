@@ -14,23 +14,21 @@ import ResetPassword from './pages/Login/ResetPassword';
 
 function App() {
   return (
-    <Router>
-       <><div className='navbar'>
-      <Navbar />
-      <br />
-    </div><div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/about-us" element={<AboutUs />} />
-        </Routes>
-      </div></>
-    </Router>
-
+    
+    <><div className='navbar'>
+    <Navbar></Navbar>
+  </div><div className='routes'>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/favorites' element={<FavoritesPage/>}/>
+        <Route path='/profile' element={<Profile/>}/>
+        <Route path='*' element={<NotFoundPage/>}/>
+        <Route path='/reset-password' element={<ResetPassword/>}/>
+        <Route path='/about-us' element={<AboutUs/>}/>
+      </Routes>  
+    </div></>
+    
+      
   );
 }
 

@@ -1,11 +1,12 @@
 import React, { useState,useEffect } from 'react';
-import './Login.css';  // Assuming you have already styled the Login form in Login.css
+import './Login.css'
 import './ResetPassword.js'; 
 import { FaUserGraduate } from "react-icons/fa6";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useNavigate, Link } from 'react-router-dom';
 import { BiShow, BiHide } from "react-icons/bi";
 import axios from "axios";
+import Navbar from '../../layout/Navbar.js';
 
 const Login = () => {
     const [showRegistrationForm, setShowRegistrationForm] = useState(false);
@@ -152,7 +153,7 @@ const Login = () => {
             if (response.status === 200) {
                 setLoginData({ username: "", password: "" }); // Reset fields after successful login
                 setError(""); // Clear errors
-                navigate("/profile"); // Redirect to home page
+                navigate("/profile"); // Redirect to profile page
             }
         } catch (error) {
             console.error("Login failed!", error);
@@ -161,121 +162,123 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            {!showRegistrationForm ? (
-                <div className='wrapper'>
-                    {error && <div className="alert alert-danger" role="alert">{error}</div>}
-                    <form onSubmit={onSubmitLogin}>
-                        <h1>Login</h1>
-                        <div className="input-box">
-                            <input
-                                type="text"
-                                name="username"
-                                value={loginUsername}
-                                placeholder='Username'
-                                required
-                                onChange={handleLoginChange}
-                            />
-                            <FaUserGraduate className="icon" />
-                        </div>
-
-                        <div class="password-container">
-                            <input
-                                //this toggles between vis text & blocked out pass
-                                type={showPassword ? "text" : "password"}
-                                name="password"
-                                value={loginPassword}
-                                placeholder='Password'
-                                required
-                                onChange={handleLoginChange}
-                            />
-                            <span onClick={passwordVisibility} className="eye-icon">
-                                {showPassword ? <BiHide /> : <BiShow />}
-                            </span>
-                            {/* <RiLockPasswordFill className="icon" /> */}
-                        </div>
-
-                        <button type="submit" className="btn btn-warning">Login</button>
-
-                        <div className="forgot-password">
-                        <br/>
-                        <Link className='forgot-password' to='/reset-password'> Forgot Password?</Link>
-                            {/* <label><input type="checkbox" />Remember me</label>
-                            <br /> */}
-                        </div>
-                        
-                        <div className='register-link'>
-                            <p>Don't have an account? <a href="#" onClick={openRegistrationForm}>Register now here</a></p>
-                        </div>
-                    </form>
-                </div>
-            ) : (
-                <div className="registrationForm">
-                    {emailError && <div className="alert alert-danger" role="alert">{emailError}</div>}
-                    {userNameError && <div className="alert alert-danger" role="alert">{userNameError}</div>}
+        <>
+            {/* Navbar displayed above the login content */}
+            <div className='navebar'>
+                <Navbar />
+            </div>
+            
+            <div className="login-container">
+                {!showRegistrationForm ? (
                     <div className='wrapper'>
-                        <form onSubmit={onSubmitRegister}>
-                            <h1>Register</h1>
+                        {error && <div className="alert alert-danger" role="alert">{error}</div>}
+                        <form onSubmit={onSubmitLogin}>
+                            <h1>Login</h1>
                             <div className="input-box">
                                 <input
                                     type="text"
-                                    placeholder='Name'
-                                    name="name"
-                                    value={name}
-                                    onChange={handleRegistrationChange}
-                                    required
-                                />
-                            </div>
-                            <div className="input-box">
-                                <input
-                                    type="email"
-                                    placeholder='Email'
-                                    name="email"
-                                    value={email}
-                                    onChange={(e) => {
-                                        handleRegistrationChange(e);
-                                        checkEmail(e.target.value);
-                                    }}
-                                    required
-                                />
-                            </div>
-                            <div className="input-box">
-                                <input
-                                    type="text"
-                                    placeholder='Username'
                                     name="username"
-                                    value={regUsername}
-                                    onChange={(e) => {
-                                        handleRegistrationChange(e);
-                                        checkUsername(e.target.value);
-                                    }}
+                                    value={loginUsername}
+                                    placeholder='Username'
                                     required
+                                    onChange={handleLoginChange}
                                 />
+                                <FaUserGraduate className="icon" />
                             </div>
+    
                             <div className="password-container">
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder='Password'
                                     name="password"
-                                    value={regPassword}
-                                    onChange={handleRegistrationChange}
+                                    value={loginPassword}
+                                    placeholder='Password'
                                     required
+                                    onChange={handleLoginChange}
                                 />
                                 <span onClick={passwordVisibility} className="eye-icon">
                                     {showPassword ? <BiHide /> : <BiShow />}
                                 </span>
                             </div>
-                            <button type="submit" className="btn btn-outline-primary">Complete Registration</button>
+    
+                            <button type="submit" className="btn btn-warning">Login</button>
+    
+                            <div className="forgot-password">
+                                <br/>
+                                <Link className='forgot-password' to='/reset-password'>Forgot Password?</Link>
+                            </div>
                             
                             <div className='register-link'>
-                                <p>Already have an account? <a href="#" onClick={openLoginForm}>Login here</a></p>
+                                <p>Don't have an account? <a href="#" onClick={openRegistrationForm}>Register now here</a></p>
                             </div>
                         </form>
                     </div>
-                </div>
-            )}
-        </div>
+                ) : (
+                    <div className="registrationForm">
+                        {emailError && <div className="alert alert-danger" role="alert">{emailError}</div>}
+                        {userNameError && <div className="alert alert-danger" role="alert">{userNameError}</div>}
+                        <div className='wrapper'>
+                            <form onSubmit={onSubmitRegister}>
+                                <h1>Register</h1>
+                                <div className="input-box">
+                                    <input
+                                        type="text"
+                                        placeholder='Name'
+                                        name="name"
+                                        value={name}
+                                        onChange={handleRegistrationChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="input-box">
+                                    <input
+                                        type="email"
+                                        placeholder='Email'
+                                        name="email"
+                                        value={email}
+                                        onChange={(e) => {
+                                            handleRegistrationChange(e);
+                                            checkEmail(e.target.value);
+                                        }}
+                                        required
+                                    />
+                                </div>
+                                <div className="input-box">
+                                    <input
+                                        type="text"
+                                        placeholder='Username'
+                                        name="username"
+                                        value={regUsername}
+                                        onChange={(e) => {
+                                            handleRegistrationChange(e);
+                                            checkUsername(e.target.value);
+                                        }}
+                                        required
+                                    />
+                                </div>
+                                <div className="password-container">
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder='Password'
+                                        name="password"
+                                        value={regPassword}
+                                        onChange={handleRegistrationChange}
+                                        required
+                                    />
+                                    <span onClick={passwordVisibility} className="eye-icon">
+                                        {showPassword ? <BiHide /> : <BiShow />}
+                                    </span>
+                                </div>
+                                <button type="submit" className="btn btn-outline-primary">Complete Registration</button>
+                                
+                                <div className='register-link'>
+                                    <p>Already have an account? <a href="#" onClick={openLoginForm}>Login here</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </>
     );
-};
-
+}
 export default Login;

@@ -8,39 +8,39 @@ import { IoMdPerson } from "react-icons/io";
 import { FaHeart } from "react-icons/fa";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
-
+import Navbar from '../layout/Navbar';
 
 const Profile = () => {
-  
+
   return (
-    <div className="profile-container">
-      <div className="profile">
-        <img src={profileImage} alt="Profile" />
-        <h1>Profile</h1>
-        <hr />
-        <div className="Profile Info">
-          <div className="user-info">
-            
+    <><div className="profile-container">
+        <div className="profile">
+          <img src={profileImage} alt="Profile" />
+          <h1>Profile</h1>
+          <hr />
+          <div className="Profile Info">
+            <div className="user-info">
+
               <>
-                <IoPersonCircleSharp /> Username: 
+                <IoPersonCircleSharp /> Username:
                 <br />
-                <IoMdPerson /> Name: 
+                <IoMdPerson /> Name:
                 <br />
                 <MdOutlineEmail /> Email: 
                 <br />
               </>
-           
-           <Link to="/favorites">
-              <button className="btn btn-warning"><FaHeart /> Favorites</button>
-            </Link>
-            <br /><br />
-            <button type="button" className="btn btn-warning" >
-              Log Out
-            </button>
+
+              <Link to="/favorites">
+                <button className="btn btn-warning"><FaHeart /> Favorites</button>
+              </Link>
+              <br /><br />
+              <button type="button" className="btn btn-warning">
+                Log Out
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div></>
   );
 };
 
