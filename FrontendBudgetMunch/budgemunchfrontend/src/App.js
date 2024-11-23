@@ -4,37 +4,33 @@ import Navbar from './layout/Navbar';
 import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login/Login'; 
-import PrivateRoute from './pages/Auth/PrivateRoute';
+
 import { FavoritesPage } from './pages/FavoritesPage';
 import Profile from './pages/Profile'; 
 import { NotFoundPage } from './pages/NotFoundPage';
 import { AboutUs } from './pages/AboutUs';
 import ResetPassword from './pages/Login/ResetPassword';
-import { AuthProvider } from './pages/Auth/AuthContext.js';
+
 
 function App() {
   return (
-    <AuthProvider> {/* AuthProvider wraps the app without Router */}
-      
-        <div className='navbar'>
-          <Navbar />
-          <br />
-        </div>
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route element={<PrivateRoute />}>
-              <Route path="/favorites" element={<FavoritesPage />} />
-              <Route path="/profile" element={<Profile />} />
-            </Route>
-            <Route path="*" element={<NotFoundPage />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/about-us" element={<AboutUs />} />
-          </Routes>
-        </div>
-      
-    </AuthProvider>
+    <Router>
+       <><div className='navbar'>
+      <Navbar />
+      <br />
+    </div><div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/about-us" element={<AboutUs />} />
+        </Routes>
+      </div></>
+    </Router>
+
   );
 }
 

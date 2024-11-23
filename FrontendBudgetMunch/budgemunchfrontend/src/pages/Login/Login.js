@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useContext } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Login.css';  // Assuming you have already styled the Login form in Login.css
 import './ResetPassword.js'; 
 import { FaUserGraduate } from "react-icons/fa6";
@@ -6,7 +6,6 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { useNavigate, Link } from 'react-router-dom';
 import { BiShow, BiHide } from "react-icons/bi";
 import axios from "axios";
-import AuthContext from '../Auth/AuthContext.js';
 
 const Login = () => {
     const [showRegistrationForm, setShowRegistrationForm] = useState(false);
@@ -14,17 +13,7 @@ const Login = () => {
     const [emailError, setEmailError] = useState("");  // Separate error state for email
     const [userNameError, setUserNameError] = useState("");  // Separate error state for username
     const [showPassword, setShowPassword] = useState(false); //state to show password or not
-    const {setToken} = useContext(AuthContext);
-
-    const logOut = () => {
-        localStorage.removeItem('token');
-
-        // Navigate to the login page
-        navigate('/login');
-    }
-       
-    // const [passwordValue, setPasswordValue] = useState('');
-    //  const [loginUsername, set] = useState('');
+   
     // State for login form
     const [loginData, setLoginData] = useState({
         username: "",
@@ -44,7 +33,6 @@ const Login = () => {
 
     const handleLoginChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
-        
     };
 
     const handleRegistrationChange = (e) => {
@@ -110,7 +98,7 @@ const Login = () => {
         const userData = {
             customerName: name,
             userName: regUsername,
-            email,
+            email:email,
             password: regPassword,
         };
     
@@ -158,16 +146,14 @@ const Login = () => {
     const onSubmitLogin = async (e) => {
         e.preventDefault();
         const loginUserData = { userName: loginUsername, password: loginPassword };
-        
-        
+
         try {
             const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginUserData);
             if (response.status === 200) {
                 setLoginData({ username: "", password: "" }); // Reset fields after successful login
                 setError(""); // Clear errors
-                navigate("/"); // Redirect to home page
-                setToken(loginUserData);
-        }
+                navigate("/profile"); // Redirect to home page
+            }
         } catch (error) {
             console.error("Login failed!", error);
             setError("Invalid username or password.");
@@ -209,12 +195,7 @@ const Login = () => {
                             {/* <RiLockPasswordFill className="icon" /> */}
                         </div>
 
-                        <button 
-                            type="submit" 
-                            className="btn btn-warning" 
-                            disabled={!loginUsername|| !loginPassword}
-                            onClick={onSubmitLogin}
-                            >Login</button>
+                        <button type="submit" className="btn btn-warning">Login</button>
 
                         <div className="forgot-password">
                         <br/>
