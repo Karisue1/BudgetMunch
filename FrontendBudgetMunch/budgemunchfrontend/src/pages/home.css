@@ -1,16 +1,16 @@
 .input-container {
-    display: flex;
-    justify-content: center; /* Center the inputs in the row */
-    align-items: center; /* Align items vertically */
-    flex-wrap: wrap; /* Wrap if necessary */
-  }
-  
-  .input-container input {
-    width: 176px; /* Set a width for the inputs */
-    margin-right: 10px; /* Space between inputs */
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: center; /* Center buttons */
-  }
+  display: flex;
+  justify-content: center; /* Center the inputs in the row */
+  align-items: center; /* Align items vertically */
+  flex-wrap: wrap; /* Wrap if necessary */
+}
+
+.input-container input {
+  width: 176px; /* Set a width for the inputs */
+  margin-right: 10px; /* Space between inputs */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center buttons */
+}
