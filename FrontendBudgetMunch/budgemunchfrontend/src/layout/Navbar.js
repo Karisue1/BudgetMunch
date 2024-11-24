@@ -33,8 +33,6 @@ export default function Navbar() {
           </Link>
         </li>
       </ul>
-    
-
 
       </div>
 
@@ -59,6 +57,6 @@ export default function Navbar() {
         </nav>  
     </div>
     </IconContext.Provider>
-  </>
+  
   )
 }
