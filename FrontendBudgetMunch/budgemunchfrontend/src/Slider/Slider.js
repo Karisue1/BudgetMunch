@@ -71,7 +71,7 @@ export const Slider = () => {
         <Card 
         title="Welcome to the BudgetMunch App!" 
         description="Just some text to have a placeholder to see how things will look." 
-        //link="/login" // This is the URL where the Login button will navigate
+        link="/login" // This is the URL where the Login button will navigate
       />
       </div>
     );

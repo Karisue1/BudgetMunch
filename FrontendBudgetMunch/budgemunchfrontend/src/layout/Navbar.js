@@ -1,23 +1,65 @@
-import React from 'react';
+import React, {useState}  from 'react';
+import { Link,useNavigate, Routes } from 'react-router-dom';
+import Login from '../pages/Login/Login';
+import { Route } from 'react-router-dom';
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
+import { IoMenu } from "react-icons/io5";
+import { Sidebar } from './Sidebar';
+import './Navbar.css';
+import { IconContext } from 'react-icons/lib';
+import { FaSun } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa";
+import login from './logo.png';
+
 export default function Navbar() {
+  const [sidebar, setSidebar] = useState(false)
+  const showSidebar = () => setSidebar(!sidebar)
+  
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-success" style={{ fontFamily: 'Playwrite AU NSW, sans-serif' }}>
-  <div className="container-fluid">
-    <img src="/Budget.png" alt="BudgetMunch Logo" width="100" height="100" className="d-inline-block align-text-top" />
-      <a className="navbar-brand" href="#">BudgetMunch</a>
-        <button className="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-    <button className="btn btn-outline-light">Add Student</button>
-  </div>
-</nav>
+    <IconContext.Provider value={{color: 'black'}}>
+      <div>
+      <div className="navbar">
+        <ul><Link to='#' className='menu-bars'>
+          <IoMenu onClick={showSidebar} size={70}/>
+        </Link>
+       </ul>
+      
+      <ul>
+        <li>
+          <Link to="/" style={{textDecoration: 'none', color: 'black'}}>
+          BudgetMunch
+          </Link>
+          <Link><img src={login} alt='logo'/></Link>
+        </li>
+      </ul>
+      <ul>
+        
+          <button to="/login" style={{textDecoration:'none', color: 'black'}}>Login</button>
+        
+      </ul>
+      </div>
+
+      {/*navbar sidebar*/}
+      <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+        <ul className='nav-menu-items' onClick={showSidebar}>
+          <li className="navbar-toggle">
+            <Link to="#" className='menu-bars'>
+                <IoMdClose size={50}/>
+            </Link>
+          </li>
+          {Sidebar.map((item, index) =>{
+            return(<li key={index} className={item.cName}>
+              <Link to={item.path}>
+              {item.icon}
+              <span>{item.title} </span>
+              </Link>
+            </li>
+            )
+          })}
+          </ul>
+        </nav>  
     </div>
+    </IconContext.Provider>
   )
 }
