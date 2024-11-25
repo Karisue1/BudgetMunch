@@ -147,20 +147,26 @@ const Login = () => {
     const onSubmitLogin = async (e) => {
         e.preventDefault();
         const loginUserData = { userName: loginUsername, password: loginPassword };
-
+    
         try {
             const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginUserData);
             if (response.status === 200) {
-                localStorage.setItem('user', JSON.stringify(response.data.user)); //temp fix for profile info
-                setLoginData({ username: "", password: "" }); // Reset fields after successful login
-                setError(""); // Clear errors
-                navigate("/profile"); // Redirect to profile page
+                const user = response.data; // User details returned from the backend
+                setLoginData({ username: "", password: "" });
+                setError("");
+                // Save user data in localStorage or context
+                localStorage.setItem('user', JSON.stringify(user));
+                // Redirect to home or keep the user logged in
+                navigate("/");
             }
         } catch (error) {
             console.error("Login failed!", error);
             setError("Invalid username or password.");
         }
     };
+    
+    
+    
 
     return (
         <>
