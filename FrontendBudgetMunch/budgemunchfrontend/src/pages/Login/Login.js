@@ -106,7 +106,7 @@ const Login = () => {
         try {
             await axios.post("http://localhost:8080/api/v1/budget/register", userData);
             setRegistrationData({
-                name: "",
+                customerName: "",
                 username: "",
                 email: "",
                 password: ""
@@ -139,6 +139,12 @@ const Login = () => {
         return () => {
             setLoginData({
                 username: "",
+                password: ""
+            });
+            setRegistrationData({
+                name: "",
+                username: "",
+                email: "",
                 password: ""
             });
         };

@@ -89,6 +89,12 @@ const [user, setUser] = useState(null);
         }
     }, [navigate]);
 
+    const handleLogout = () => {
+      localStorage.removeItem('user');
+      setUser(null);
+    }
+
+
     if (!user) {
         return <div>Loading...</div>;
     }

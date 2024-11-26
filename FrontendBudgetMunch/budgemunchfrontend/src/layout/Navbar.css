@@ -5,7 +5,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 40px; /* Adjust padding for spacing */
+    /* padding: 0 40px; Adjust padding for spacing */
 }
 .navbar-center {
     display: flex; /* Use flexbox for layout */
@@ -36,66 +36,104 @@ ul li {
     align-items: center;
 }
 
+/* Hamburger menu icon */
 .menu-bars {
     margin-left: 2rem;
     font-size: 2rem;
     background: none;
+    cursor: pointer;
 }
 
+/* Sidebar styling */
 .nav-menu {
     background-color: #e4b157;
     width: 250px;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    flex-direction: column;
     position: fixed;
-    top: 130px;
-    left: -100%;
-    transition: left 350ms ease;
+    top: 130px; /* Matches the height of the navbar */
+    left: -100%; /* Hidden by default */
+    transition: left 350ms ease; /* Smooth slide-in animation */
 }
 
 .nav-menu.active {
-    left: 0;
+    left: 0; /* Sidebar slides in when active */
 }
 
+/* Sidebar item container */
 .nav-menu-items {
+    list-style: none;
     width: 100%;
     padding: 0;
+    margin: 0;
 }
 
+/* Close button */
 .navbar-toggle {
-    margin-left: 10px;
-    width: 100%;
-    height: 100px;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
+    margin-left: 10px;
+    height: 100px;
 }
 
+/* Sidebar items */
 .nav-text {
     display: flex;
-    justify-content: start;
     align-items: center;
-    padding: 8px 16px;
-    height: 85px;
+    padding: 12px 16px;
+    font-size: 18px;
     border-radius: 4px;
 }
 
-.nav-text a {
+/* Links in the sidebar */
+.nav-text a,
+.nav-text button {
     text-decoration: none;
     color: black;
-    font-size: 18px;
     display: flex;
     align-items: center;
-    padding: 0 16px;
     width: 100%;
-    height: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
 }
 
-.nav-text a:hover {
-    background-color: #2a697a;
+/* Hover effect */
+.nav-text a:hover,
+.nav-text button:hover {
+    background-color: #d1a45b;
+    cursor: pointer;
 }
 
-span {
+/* Align text next to the icon */
+.nav-text span {
     margin-left: 16px;
+}
+
+/* Login button in navbar */
+.btn {
+    font-size: 18px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: black;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #d1a45b;
+}
+
+/* Sidebar toggle icons */
+.navbar .menu-bars:hover {
+    color: #2a697a;
 }

@@ -29,9 +29,7 @@ export default function Navbar() {
               <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
                 BudgetMunch
               </Link>
-              <Link to="/"><img src={login} alt="logo" className="logo"/>
-                
-              </Link>
+              <Link to="/"><img src={login} alt="logo" className="logo" /></Link>
             </li>
           </ul>
 
@@ -45,28 +43,19 @@ export default function Navbar() {
           </ul>
         </div>
 
-        {/* Sidebar Navigation Menu */}
+        {/* Sidebar Menu */}
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className='nav-menu-items' onClick={showSidebar}>
+          <ul className="nav-menu-items" onClick={showSidebar}>
             <li className="navbar-toggle">
-              <Link to="#" className="menu-bars">
+              <Link to="#" style={{ textDecoration: 'none', color: 'black' }} className="menu-bars">
                 <IoMdClose size={50} />
               </Link>
             </li>
-            {Sidebar.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              );
-            })}
+            {/* Render the Sidebar */}
+            <Sidebar />
           </ul>
         </nav>
       </div>
     </IconContext.Provider>
   );
 }
-
