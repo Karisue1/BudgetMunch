@@ -40,6 +40,6 @@
   .card-button:hover {
     background-color: #659a05;
     color: black;
-    font-weight: bold;
+    font-weight: bold; /**/
     
-  }
+  } 

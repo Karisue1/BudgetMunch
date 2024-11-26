@@ -25,7 +25,7 @@ export default function Navbar() {
         </Link>
        </ul>
       
-      <ul>
+      <ul className='navbar-center'>
         <li>
           <Link to="/" style={{textDecoration: 'none', color: 'black'}}>
           BudgetMunch

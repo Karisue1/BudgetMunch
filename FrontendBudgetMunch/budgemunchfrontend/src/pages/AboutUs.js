@@ -7,6 +7,7 @@ import { Slider } from "../Slider/Slider"
 
 export const AboutUs = () => {
   return (
+    
     <Slider/>
   );
 }

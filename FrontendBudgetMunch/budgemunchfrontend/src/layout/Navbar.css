@@ -9,45 +9,61 @@
     width: 100%;
     
 }
-.logo{
-    width: 100x; 
-    cursor:pointer;
+.logo {
+    width: 100px;
+    margin-left: 10px;
+    cursor: pointer;
     justify-content: start;
     
 }
-ul{
+.navbar-center {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically align items */
+    justify-content: center; /* Horizontally center items */
+    gap: 10px; /* Optional: Add some space between the logo and text */
+  }
+
+.navbar-center li {
+    display: flex;
+    align-items: center;
+    font-size: 75px;
+}
+ul {
     flex: 0;
     list-style: none;
     text-align: start;
 }
-ul li{
-    display:flex;
+ul li {
+    display: flex;
     font-size: 70px;
 
 }
-.menu-bars{
+.menu-bars {
     margin-left: 2rem;
     font-size: 2rem;
     background: none;
 
 }
-.nav-menu{
+.nav-menu {
     background-color: #e4b157;
-    width:250px;
-    height: 100vh;
+    width: 250px;
+    height: 105vh; /* Changed from 100 to 105 to fill entire height of page */
     display: flex;
     justify-content: center;
     position: fixed;
-    top: 130px;;
+    z-index: 2;
+    /* top: 0; Removal fixed issue where sidebar jumped to top of page while sliding left */
     left: -100%;
-    transition: 850m;
+    transition: 350ms ease;
 }
 
-.nav-menu.active{
-    left: 0;
-    transition: 350ms;
+.nav-menu.active {
+    left: 0px;
+    transition: 350ms ease;
+    /* top: 0; Removal fixed issue where sidebar jumped to top of page while sliding left */
+    position: relative;
 }
-.nav-text{
+.nav-text {
     display: flex;
     justify-content: start;
     align-items: center;
@@ -65,27 +81,26 @@ ul li{
     color: black;
     font-size: 18px;
     width: 95%;
-    height:100%;
-    display:flex;
+    height: 100%;
+    display: flex;
     align-items: center;
     padding: 0 16px;
-    border-radius:4px;
+    border-radius: 4px;
 }
 .nav-text a:hover{
     background-color: #2A697A;
 }
 .nav-menu-items {
-    width:100%;
+    width: 100%;
 }
 .navbar-toggle {
     margin-left: 10px;
     width: 100%;
     height: 100px;
-    display:flex;
+    display: flex;
     justify-content: start;
     align-items: center;
 }
-span{
+span {
     margin-left: 16px;
-
 }
