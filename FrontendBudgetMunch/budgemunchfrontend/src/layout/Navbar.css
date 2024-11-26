@@ -50,22 +50,20 @@ ul li {
 .nav-menu {
     background-color: #e4b157;
     width: 250px;
-    height: 105vh; /* Changed from 100 to 105 to fill entire height of page */
+    height: 100vh;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    position: fixed;  
-    z-index: 2;
-    /* top: 0; Removal fixed issue where sidebar jumped to top of page while sliding left */
+    position: fixed;
+    top: 130px;  /* Adjust if needed, this ensures the sidebar appears under the navbar */
     left: -100%;
-    transition: 350ms ease;
+    transition: left 350ms ease;
+    z-index: 10; /* Sidebar above the content */
 }
 
 .nav-menu.active {
-    left: 0px;
-    transition: 350ms ease;
-    /* top: 0; Removal fixed issue where sidebar jumped to top of page while sliding left */
-    position: relative;
+    left: 0;  /* Sidebar slides in */
+    transition: left 350ms ease;
 }
 
 /* Sidebar item container */
@@ -146,3 +144,5 @@ ul li {
 .navbar .menu-bars:hover {
     color: #2a697a;
 }
+
+

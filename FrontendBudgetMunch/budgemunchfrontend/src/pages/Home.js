@@ -30,6 +30,7 @@ export default function Home() {
       setFavorites([...favorites, restaurant]);
     }
   };
+  
   const onInputChangeAddress = (e) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
     setAddressError(""); 
@@ -237,15 +238,10 @@ export default function Home() {
                     </button>
                   </div>
                 </th>
+                
                 <th scope="col">
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <span style={{ marginRight: '10px' }}>Price Range per Person</span>
-                  </div>
-                </th>
-
-                <th scope="col">
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <span style={{ marginRight: '10px' }}>Add to Favorites</span>
                     <button onClick={() => handleSort('price_level')} type="button" className="btn btn-light btn-sm">
                       {renderSortArrow('price_level')}
                     </button>
@@ -268,15 +264,6 @@ export default function Home() {
                     <td>{restaurant.vicinity}</td>
                     <td>{restaurant.rating}</td>
                     <td>{restaurant.price_level}</td>
-                    <td>
-                      <button
-                        onClick={() => handleAddResturant(restaurant)} // Passing the restaurant object
-                        type="button"
-                        className="favorite-btn btn btn-outline-info"
-                      >
-                        <FaHeartCirclePlus />
-                      </button>
-                    </td>
                   </tr>
                 ))
               )}

@@ -1,5 +1,4 @@
 import Home from "./Home"
-import './AboutUs.css'
 import Navbar from "../layout/Navbar"
 import React, { useState } from 'react'
 // import BtnSlider from './BtnSlider'

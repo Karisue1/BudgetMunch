@@ -101,7 +101,7 @@ const [user, setUser] = useState(null);
 
     return (
         <>
-            <div className="navbar">
+            <div className="navbar-menu">
                 <Navbar />
             </div>
             <div className="profile-container">

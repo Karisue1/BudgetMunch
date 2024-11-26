@@ -12,10 +12,12 @@
 }
 @media screen and (max-width: 768px) {
     .container-slider{
-        height: 50vh;;
+        height: 50vh;
+        z-index: 1;
     }
     .slide img {
         object-fit: cover;
+        z-index:1;
     }
 }
 .card-container, .navbar, .header, .other-elements {

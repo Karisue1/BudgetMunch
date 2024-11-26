@@ -18,14 +18,13 @@ export const Sidebar = () => {
     // Logout handler
     const handleLogout = () => {
         localStorage.removeItem('user'); // Clear user data
-        navigate('/login'); // Redirect to login
+        navigate('/about-us'); // Redirect to login
     };
 
     // Menu items for the sidebar
     const menuItems = [
         { title: 'Home', path: '/', icon: <IoHomeSharp size={30} /> },
         { title: 'Profile', path: '/profile', icon: <FaRegUserCircle size={30} /> },
-        { title: 'Favorites', path: '/favorites', icon: <FaHeart size={30} /> },
         { title: 'About Us', path: '/about-us', icon: <IoBookOutline size={30} /> },
         { title: 'Log Out', action: handleLogout, icon: <FaSignOutAlt size={30} /> },
     ];
