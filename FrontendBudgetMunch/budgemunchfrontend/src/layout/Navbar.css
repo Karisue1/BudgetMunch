@@ -7,6 +7,7 @@
     width: 100%;
     /* padding: 0 40px; Adjust padding for spacing */
 }
+
 .navbar-center {
     display: flex; /* Use flexbox for layout */
     align-items: center; /* Vertically align items */
@@ -25,18 +26,20 @@
     margin-left: 10px; /* Add margin to separate logo from website name */
 }
 
+/* Tito had different ul */
 ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
+/* Tito had different ul li */
 ul li {
     display: flex;
     align-items: center;
 }
 
 /* Hamburger menu icon */
+
 .menu-bars {
     margin-left: 2rem;
     font-size: 2rem;
@@ -44,26 +47,30 @@ ul li {
     cursor: pointer;
 }
 
-/* Sidebar styling */
 .nav-menu {
     background-color: #e4b157;
     width: 250px;
-    height: 100vh;
+    height: 105vh; /* Changed from 100 to 105 to fill entire height of page */
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    position: fixed;
-    top: 130px; /* Matches the height of the navbar */
-    left: -100%; /* Hidden by default */
-    transition: left 350ms ease; /* Smooth slide-in animation */
+    position: fixed;  
+    z-index: 2;
+    /* top: 0; Removal fixed issue where sidebar jumped to top of page while sliding left */
+    left: -100%;
+    transition: 350ms ease;
 }
 
 .nav-menu.active {
-    left: 0; /* Sidebar slides in when active */
+    left: 0px;
+    transition: 350ms ease;
+    /* top: 0; Removal fixed issue where sidebar jumped to top of page while sliding left */
+    position: relative;
 }
 
 /* Sidebar item container */
 .nav-menu-items {
+
     list-style: none;
     width: 100%;
     padding: 0;
@@ -80,6 +87,7 @@ ul li {
 }
 
 /* Sidebar items */
+/* Tito's was different */
 .nav-text {
     display: flex;
     align-items: center;
@@ -89,6 +97,7 @@ ul li {
 }
 
 /* Links in the sidebar */
+/* Tito's button was different */
 .nav-text a,
 .nav-text button {
     text-decoration: none;

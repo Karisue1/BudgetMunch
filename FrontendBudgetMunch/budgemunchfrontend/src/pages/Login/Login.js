@@ -196,7 +196,8 @@ const Login = () => {
                                     required
                                     onChange={handleLoginChange}
                                 />
-                                <FaUserGraduate className="icon" />
+                                {/* <FaUserGraduate className="icon" /> Icon that was out of place 
+                                by username field */}
                             </div>
     
                             <div className="password-container">

@@ -6,6 +6,7 @@ import { FavoritesPage } from './pages/FavoritesPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import Login from './pages/Login/Login';
 import reportWebVitals from './reportWebVitals';
+//import './index.css';
 
 // Create the router with routes
 const router = createBrowserRouter([

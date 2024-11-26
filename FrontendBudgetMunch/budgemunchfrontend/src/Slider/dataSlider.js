@@ -4,21 +4,21 @@ const dataSlider = [
 
     { 
         id: 1, 
-        image: "/Images/burger.jpg",
+        image: "/Images/BudgetMunch Welcome.jpg",
         title: "Test Title",
         description: "How will text look when being displayed with images. I want to see if the text is still legible and that the images are not being obscured."
     },
     { 
         id: 2, 
-        image: "/Images/salad.jpg" 
+        image: "/Images/BudgetMunch Step 1.jpg" 
     },
     { 
         id: 3, 
-        image: "/Images/choc_cake.jpg" 
+        image: "/Images/BudgetMunch Step 2.jpg" 
     },
     { 
         id: 4, 
-        image: "/Images/pancakes.jpg" 
+        image: "/Images/BudgetMunch Step 3.jpg" 
     }
 
     // {
