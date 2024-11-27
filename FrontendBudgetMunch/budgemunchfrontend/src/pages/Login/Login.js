@@ -48,7 +48,7 @@ const Login = () => {
     const checkEmail = async (email) => {
         if (email) {
             try {
-                const response = await axios.get(`http://localhost:8080/api/v1/budget/check-email/${email}`);
+                const response = await axios.get(`https://project2-kpnb.onrender.com/api/v1/budget/check-email/${email}`);
                 if (response.data === true) {
                     setEmailError("Email already exists."); // Set email error
                 } else {
@@ -65,7 +65,7 @@ const Login = () => {
     const checkUsername = async (username) => {
         if (username) {
             try {
-                const response = await axios.get(`http://localhost:8080/api/v1/budget/check-username/${username}`);
+                const response = await axios.get(`https://project2-kpnb.onrender.com/api/v1/budget/check-username/${username}`);
                 if (response.data === true) {
                     setUserNameError("Username already exists."); // Set username error
                 } else {
@@ -104,7 +104,7 @@ const Login = () => {
         };
     
         try {
-            await axios.post("http://localhost:8080/api/v1/budget/register", userData);
+            await axios.post("https://project2-kpnb.onrender.com/api/v1/budget/register", userData);
             setRegistrationData({
                 customerName: "",
                 username: "",
@@ -155,7 +155,7 @@ const Login = () => {
         const loginUserData = { userName: loginUsername, password: loginPassword };
     
         try {
-            const response = await axios.post("http://localhost:8080/api/v1/budget/login", loginUserData);
+            const response = await axios.post("https://project2-kpnb.onrender.com/api/v1/budget/login", loginUserData);
             if (response.status === 200) {
                 const user = response.data; // User details returned from the backend
                 setLoginData({ username: "", password: "" });

@@ -40,9 +40,9 @@ const ResetPassword = () => {
         setIsSending(true);
 
         try {
-            const emailExistsResponse = await axios.get(`http://localhost:8080/api/v1/budget/check-email/${email}`);
+            const emailExistsResponse = await axios.get(`https://project2-kpnb.onrender.com/api/v1/budget/check-email/${email}`);
             if (emailExistsResponse.data === true) {
-                await axios.post('http://localhost:8080/api/v1/budget/send-email', null, {
+                await axios.post('https://project2-kpnb.onrender.com/api/v1/budget/send-email', null, {
                     params: { to: email },
                 });
                 setSuccessMessage("E-mail verification sent successfully!");
@@ -67,7 +67,7 @@ const ResetPassword = () => {
         setCodeError("");
 
         try {
-            await axios.post('http://localhost:8080/api/v1/budget/verify-code', null, {
+            await axios.post('https://project2-kpnb.onrender.com/api/v1/budget/verify-code', null, {
                 params: { email, code },
             });
             setSuccessMessage("Code verified successfully");
@@ -88,7 +88,7 @@ const ResetPassword = () => {
         }
         
         try {
-            await axios.post('http://localhost:8080/api/v1/budget/password-reset', null, {
+            await axios.post('https://project2-kpnb.onrender.com/api/v1/budget/password-reset', null, {
                 params: { email, newPassword: firstNewPassword },
             });
             setSuccessMessage("Password reset successfully!");

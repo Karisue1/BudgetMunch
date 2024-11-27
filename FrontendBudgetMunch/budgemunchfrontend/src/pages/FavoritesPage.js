@@ -138,7 +138,7 @@
 
 // //     try {
 // //       // Post the address to your backend
-// //       await axios.post("http://localhost:8080/api/v1/budget/address", address);
+// //       await axios.post("https://project2-kpnb.onrender.com/api/v1/budget/address", address);
 // //       console.log("Address submitted successfully");
 
 // //       // After the address is submitted, call the restaurant API
@@ -159,7 +159,7 @@
 // //   const loadRestaurants = async () => {
 // //     try {
 // //       // Pass the address in the request to get the location-based restaurant data
-// //       const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation", {
+// //       const result = await axios.get("https://project2-kpnb.onrender.com/api/v1/budget/getLocation", {
 // //         params: {
 // //           // Concatenating the address -> gets called in the getGeoLocation of the backend
 // //           address: `${address.streetAddress}, ${address.city}, ${address.state},${address.budget}`,

@@ -53,7 +53,7 @@ export default function Home() {
     }
 
     try {
-      await axios.post("http://localhost:8080/api/v1/budget/address", address);
+      await axios.post("https://project2-kpnb.onrender.com/api/v1/budget/address", address);
       console.log("Address submitted successfully");
       const result = await loadRestaurants();
 
@@ -71,7 +71,7 @@ export default function Home() {
   // Fetch Restaurants Logic
   const loadRestaurants = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/api/v1/budget/getLocation", {
+      const result = await axios.get("https://project2-kpnb.onrender.com/api/v1/budget/getLocation", {
         params: {
           address: `${address.streetAddress}, ${address.city}, ${address.state}, ${address.budget}`,
           budget: address.budget
