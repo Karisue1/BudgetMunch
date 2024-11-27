@@ -17,7 +17,7 @@ export const Sidebar = ({ isLoggedIn }) => {
   
     // Menu items for the sidebar
     const menuItems = [
-      { title: 'Home', path: '/', icon: <IoHomeSharp size={30} />, show: isLoggedIn },  // Only show if logged in
+      { title: 'Home', path: '/home', icon: <IoHomeSharp size={30} />, show: isLoggedIn },  // Only show if logged in
       { title: 'Profile', path: '/profile', icon: <FaRegUserCircle size={30} />, show: isLoggedIn },
       { title: 'About Us', path: '/about-us', icon: <IoBookOutline size={30} />, show: true },
       { title: 'Log Out', action: handleLogout, icon: <FaSignOutAlt size={30} />, show: isLoggedIn },

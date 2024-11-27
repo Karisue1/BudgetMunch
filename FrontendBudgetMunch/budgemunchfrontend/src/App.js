@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './layout/Navbar';
 import Home from './pages/Home';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login/Login'; 
 
 import { FavoritesPage } from './pages/FavoritesPage';
@@ -18,7 +18,8 @@ function App() {
     <><div className='routes'>
       <Routes>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/' element={<Home/>}/>
+        <Route path="/" element={<Navigate to="/about-us" replace />} />
+        <Route path="/home" element ={<Home/>}/>
         <Route path='/favorites' element={<FavoritesPage/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='*' element={<NotFoundPage/>}/>

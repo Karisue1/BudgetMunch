@@ -163,7 +163,7 @@ const Login = () => {
                 // Save user data in localStorage or context
                 localStorage.setItem('user', JSON.stringify(user));
                 // Redirect to home or keep the user logged in
-                navigate("/");
+                navigate("/home");
             }
         } catch (error) {
             console.error("Login failed!", error);
