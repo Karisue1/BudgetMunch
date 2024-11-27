@@ -6,6 +6,7 @@ import { FavoritesPage } from './pages/FavoritesPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import Login from './pages/Login/Login';
 import reportWebVitals from './reportWebVitals';
+import { AboutUs } from './pages/AboutUs';
 //import './index.css';
 
 // Create the router with routes
@@ -19,8 +20,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
-    element: <Login />,  // Fixed typo here (elemnet -> element)
+    path: "/about-us",
+    element: <AboutUs />,  // Fixed typo here (elemnet -> element)
   },
 ]);
 
