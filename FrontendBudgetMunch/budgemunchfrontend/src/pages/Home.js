@@ -260,7 +260,14 @@ export default function Home() {
                 filteredRestaurants.map((restaurant, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{restaurant.name}</td>
+                    <td>
+                      <a
+                        href={`https://www.google.com/search?q=${encodeURIComponent(restaurant.name)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {restaurant.name}
+                      </a></td>
                     <td>{restaurant.vicinity}</td>
                     <td>{restaurant.rating}</td>
                     <td>{restaurant.price_level}</td>
