@@ -107,9 +107,10 @@ const [user, setUser] = useState(null);
             <div className="profile-container">
                 <div className="profile">
                     {/* Display Profile Image */}
+                   
                     <img src={profileImage} alt="Profile" className="profile-image" />
                     <h2>{user.name}</h2>
-                    <p><strong>Name:</strong>{user.customerName}</p>
+                    <p><strong>Name:</strong> {user.customerName}</p>
                     <p><strong>Username:</strong> {user.username}</p>
                     <p><strong>Email:</strong> {user.email}</p>
                     

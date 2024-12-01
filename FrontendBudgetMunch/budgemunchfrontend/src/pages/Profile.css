@@ -1,34 +1,50 @@
 .profile-container{
+  
   display:flex;
   justify-content: center;
-  align-items: top;
+  align-items: center;
   min-height: 100vh; 
 }
 .profile{
+
   background-image: url("./Login/Components/profile.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 700px;
-  height: 80vh;
+  width: 100vw;
+  height: 100vh;
   display:flex;
   flex-direction: column;
+  /* justify-content: center; */
+  font-size: x-large;
   padding:  40px;
   align-items: center;
+  position: relative;
+ 
 }
+
 img{
   width: 100px;
   height: 100px;
   border-radius: 100%;
   margin: 1 auto;
 }
+
+.profile-image{
+  width: 125px;
+  height: 125px;
+  border-radius: 100%;
+  margin: 0 auto;
+}
 h1{
+
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
   padding: 10px 0;
 }
 hr{
+ 
   width: 100%;
 }
 body {
