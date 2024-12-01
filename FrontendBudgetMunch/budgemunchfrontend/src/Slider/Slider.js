@@ -46,10 +46,10 @@ export const Slider = () => {
               <img src={process.env.PUBLIC_URL + obj.image} alt={`Slide ${index + 1}`} />
               
               {/* Overlay Text */}
-              <div className="slide-text">
+              {/* <div className="slide-text">
                 <h2>{obj.title}</h2>
                 <p>{obj.description}</p>
-              </div>
+              </div> */}
             </div>
           ))}
   
@@ -69,8 +69,8 @@ export const Slider = () => {
   
         {/* Card Component Below the Slider */}
         <Card 
-        title="Welcome to the BudgetMunch App!" 
-        description="Just some text to have a placeholder to see how things will look." 
+        title="Welcome to BudgetMunch!" 
+        description="Tasty Finds That Won’t Break the Bank." 
         link="/login" // This is the URL where the Login button will navigate
       />
       </div>

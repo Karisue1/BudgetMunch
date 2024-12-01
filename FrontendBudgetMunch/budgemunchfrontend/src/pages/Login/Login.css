@@ -6,7 +6,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
   font-family: "Bona Nova SC", serif ;
@@ -18,11 +17,11 @@ body {
   ;
 }
 .login-container {
+  height: 80vh; /* Brings down login container*/
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -77,11 +76,9 @@ body {
   font-size: 20px;
   color: #888; /* Adjust color as needed */
 }
-
 .eye-icon:hover {
   color: #333; /* Darker color on hover */
 }
-
 .password-container input{
   width: 100%;
   height: 100%;
@@ -93,7 +90,6 @@ body {
   font-size: 16px;
   color: #000000;
 }
-
 .password-container input::placeholder{
   color: #00000050;
 }
@@ -116,4 +112,36 @@ body {
   float:right;
 
 }
+.btn {
+  width: 100%; /* Optional: Remove if you don't want full width */
+  max-width: 200px; /* Controls the button's max width */
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  text-align: center; /* Centers the text inside the button */
+  
+}
+/* Hover effect for the button */
+button:hover {
+  background-color: #d1a45b;
+}
+.loginbtn {
+  width: 100%; /* Optional: Remove if you don't want full width */
+  max-width: 200px; /* Controls the button's max width */
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  text-align: center; /* Centers the text inside the button */
 
+}
+.forgot-password {
+  text-align: center;
+}

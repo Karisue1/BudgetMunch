@@ -1,3 +1,4 @@
+/* Navbar Styling */
 .navbar {
     background-color: #659a05;
     height: 130px;
@@ -5,41 +6,43 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    /* padding: 0 40px; Adjust padding for spacing */
+    position: fixed;
+    z-index: 20;
+    padding: 0 20px; /* Add padding for spacing */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
+/* Center logo and text horizontally */
 .navbar-center {
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Vertically align items */
-    justify-content: center; /* Horizontally center items */
-    gap: 10px; /* Optional: Add some space between the logo and text */
-  }
-
-.navbar-center li {
     display: flex;
     align-items: center;
-    font-size: 75px;
+    justify-content: center;
+    gap: 10px;
+    font-size: 60px;
 }
 
+/* Logo Styling */
 .logo {
-    width: 100px; /* Adjust the size of your logo */
-    margin-left: 10px; /* Add margin to separate logo from website name */
+    width: 100px; /* Adjust logo size */
+    max-width: 100px;
+    margin-right: 10px;
 }
 
-/* Tito had different ul */
+/* Adjust ul (list) styling */
 ul {
+    /* display: flex; Caused sidebar items to start beside close button */
+    align-items: center;
     list-style: none;
     padding: 0;
     margin: 0;
 }
-/* Tito had different ul li */
+
 ul li {
     display: flex;
     align-items: center;
 }
 
 /* Hamburger menu icon */
-
 .menu-bars {
     margin-left: 2rem;
     font-size: 2rem;
@@ -47,41 +50,38 @@ ul li {
     cursor: pointer;
 }
 
+/* Login Button */
+.btn {
+    font-size: 18px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto; /* Push button to the right */
+    margin-right: 20px; /* Adjust spacing */
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: black;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #d1a45b;
+}
+
+/* Sidebar Styling */
 .nav-menu {
     background-color: #e4b157;
     width: 250px;
-    height: 100vh;
+    height: 105vh; /* 1150px manually gives height */
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    position: fixed;
-    top: 130px;  /* Adjust if needed, this ensures the sidebar appears under the navbar */
+    position: absolute;
     left: -100%;
     transition: left 350ms ease;
-    z-index: 10; /* Sidebar above the content */
-}
-
-.nav-menu.active {
-    left: 0;  /* Sidebar slides in */
-    transition: left 350ms ease;
-}
-
-/* Sidebar item container */
-.nav-menu-items {
-
-    list-style: none;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-/* Close button */
-.navbar-toggle {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: 10px;
-    height: 100px;
+    z-index: 10;
 }
 
 /* Sidebar items */
@@ -90,7 +90,8 @@ ul li {
     display: flex;
     align-items: center;
     padding: 12px 16px;
-    font-size: 18px;
+    font-size: 32px; /* Originally 18px */
+    font-weight: bold;
     border-radius: 4px;
 }
 
@@ -98,9 +99,10 @@ ul li {
 /* Tito's button was different */
 .nav-text a,
 .nav-text button {
+    
     text-decoration: none;
     color: black;
-    display: flex;
+    display: block;
     align-items: center;
     width: 100%;
     background: none;
@@ -122,27 +124,72 @@ ul li {
     margin-left: 16px;
 }
 
-/* Login button in navbar */
-.btn {
-    font-size: 18px;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
+.nav-menu.active {
+    left: 0;
 }
 
-.btn-warning {
-    background-color: #ffc107;
-    color: black;
-    border: none;
+/* Close button */
+.navbar-toggle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 10px;
+    height: 100px;
 }
 
-.btn-warning:hover {
-    background-color: #d1a45b;
+/* Sidebar item container */
+.nav-menu-items {
+
+    list-style: none;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+/* Responsive Media Queries */
+
+/* For screens smaller than 768px (tablets, mobile phones) */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack elements vertically */
+        height: auto; /* Adjust height */
+        padding: 10px 20px; /* Adjust padding */
+    }
+
+    .navbar-center {
+        flex-direction: column; /* Stack logo and text vertically */
+    }
+
+    .logo {
+        width: 80px; /* Adjust logo size */
+    }
+
+    ul {
+        display: none; /* Hide ul on small screens (optional) */
+    }
+
+    .btn {
+        width: 100%; /* Make button take full width */
+        margin: 10px 0;
+    }
+
+    .menu-bars {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
 }
 
-/* Sidebar toggle icons */
-.navbar .menu-bars:hover {
-    color: #2a697a;
+/* For screens smaller than 480px (mobile phones) */
+@media screen and (max-width: 480px) {
+    .navbar {
+        padding: 5px 10px; /* Smaller padding for mobile */
+    }
+
+    .logo {
+        width: 70px; /* Smaller logo */
+    }
+
+    .btn {
+        font-size: 16px; /* Smaller button text */
+    }
 }
-
-

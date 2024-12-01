@@ -1,33 +1,62 @@
-.card {
+/* .card {
     width: 30%;
-    height: 30%;
+    height: 30vh;
     margin: 30px auto;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: #fff;
     text-align: center;
-  }
+  } */
+  .card {
+    width: 90%; /* Default width for smaller screens */
+    max-width: 500px; /* Limit the maximum width */
+    height: 350px; /* Let height adjust based on content */
+    margin: 30px auto; /* Center the card horizontally */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    text-align: center;
+    transition: all 0.3s ease; /* Smooth transitions */
+}
+
+/* For medium screens (tablets, between 768px and 1024px) */
+@media screen and (min-width: 768px) {
+    .card {
+        width: 40%; /* Increase the width for tablets */
+    }
+}
+
+/* For large screens (desktops, larger than 1024px) */
+@media screen and (min-width: 1024px) {
+    .card {
+        width: 30%; /* Default width for larger screens */
+    }
+}
   
   .card h3 {
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
     color: #333;
     margin: 0;
   }
   
   .card p {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #666;
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+    color: goldenrod;
   }
   
   /* Style for the Login button */
   .card-button {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    font-size: 16px;
+    width: auto;
+    display: block;
+    margin-top: 80px;
+    padding: 10px;
+    font-size: 25px;
     font-weight: bold;
     color: white;
     background-color: #007bff;
@@ -40,6 +69,6 @@
   .card-button:hover {
     background-color: #659a05;
     color: black;
-    font-weight: bold; /**/
+    font-weight: bold;
     
   } 
