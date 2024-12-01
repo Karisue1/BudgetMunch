@@ -77,12 +77,17 @@ export default function Navbar() {
         </div>
 
         {/* Sidebar Menu */}
+        
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className="nav-menu-items" onClick={showSidebar}>
+        
+          <ul className="nav-menu-items" onClick={showSidebar}> 
+            
             <li className="navbar-toggle">
+              
               <Link to="#" style={{ textDecoration: 'none', color: 'black' }} className="menu-bars">
                 <IoMdClose size={50} />
               </Link>
+            
             </li>
             <Sidebar isLoggedIn={isLoggedIn} />
           </ul>

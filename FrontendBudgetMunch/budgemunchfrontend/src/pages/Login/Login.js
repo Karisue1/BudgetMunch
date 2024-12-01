@@ -182,51 +182,58 @@ const Login = () => {
             </div>
             
             <div className="login-container">
-                {!showRegistrationForm ? (
-                    <div className='wrapper'>
-                        {error && <div className="alert alert-danger" role="alert">{error}</div>}
-                        <form onSubmit={onSubmitLogin}>
-                            <h1>Login</h1>
-                            <div className="input-box">
-                                <input
-                                    type="text"
-                                    name="username"
-                                    value={loginUsername}
-                                    placeholder='Username'
-                                    required
-                                    onChange={handleLoginChange}
-                                />
-                                {/* <FaUserGraduate className="icon" /> Icon that was out of place 
-                                by username field */}
-                            </div>
-    
-                            <div className="password-container">
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    name="password"
-                                    value={loginPassword}
-                                    placeholder='Password'
-                                    required
-                                    onChange={handleLoginChange}
-                                />
-                                <span onClick={passwordVisibility} className="eye-icon">
-                                    {showPassword ? <BiHide /> : <BiShow />}
-                                </span>
-                            </div>
-    
-                            <button type="submit" className="btn btn-warning">Login</button>
-    
-                            <div className="forgot-password">
-                                <br/>
-                                <Link className='forgot-password' to='/reset-password'>Forgot Password?</Link>
-                            </div>
-                            
-                            <div className='register-link'>
-                                <p>Don't have an account? <a href="#" onClick={openRegistrationForm}>Register now here</a></p>
-                            </div>
-                        </form>
-                    </div>
-                ) : (
+  {!showRegistrationForm ? (
+    <div className="wrapper">
+      {error && <div className="alert alert-danger" role="alert">{error}</div>}
+      <form onSubmit={onSubmitLogin}>
+        <h1>Login</h1>
+
+        {/* Username Field */}
+        <div className="input-box">
+          <input
+            type="text"
+            name="username"
+            value={loginUsername}
+            placeholder="Username"
+            required
+            onChange={handleLoginChange}
+          />
+        </div>
+
+        {/* Password Field */}
+        <div className="password-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={loginPassword}
+            placeholder="Password"
+            required
+            onChange={handleLoginChange}
+          />
+          <span onClick={passwordVisibility} className="eye-icon">
+            {showPassword ? <BiHide /> : <BiShow />}
+          </span>
+        </div>
+
+        {/* Login Button */}
+        <div className="button-container">
+          <button type="submit" className="loginbtn">Login</button>
+        </div>
+
+        {/* Forgot Password Link */}
+        <div className="forgot-password">
+          <br />
+          <Link className="forgot-password" to="/reset-password">Forgot Password?</Link>
+        </div>
+
+        {/* Registration Link */}
+        <div className="register-link">
+            <br/>
+          <p>Don't have an account? <a href="#" onClick={openRegistrationForm}>Register now here</a></p>
+        </div>
+      </form>
+    </div>
+  ) : (
                     <div className="registrationForm">
                         {emailError && <div className="alert alert-danger" role="alert">{emailError}</div>}
                         {userNameError && <div className="alert alert-danger" role="alert">{userNameError}</div>}
@@ -282,8 +289,12 @@ const Login = () => {
                                         {showPassword ? <BiHide /> : <BiShow />}
                                     </span>
                                 </div>
-                                <button type="submit" className="btn btn-outline-primary">Complete Registration</button>
-                                
+
+                                <div className="button-container">
+                                    <button type="submit" className="registrationbtn">Submit</button>
+                                </div>
+                                <br/>
+
                                 <div className='register-link'>
                                     <p>Already have an account? <a href="#" onClick={openLoginForm}>Login here</a></p>
                                 </div>

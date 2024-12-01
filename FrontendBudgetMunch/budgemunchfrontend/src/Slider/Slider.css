@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Leckerli+One&display=swap');
 
+
+
 .container-slider {
     max-width: 100%;
     height: 700px;
@@ -17,7 +19,7 @@
     }
     .slide img {
         object-fit: cover;
-        z-index:1;
+        z-index: 1;
     }
 }
 .card-container, .navbar, .header, .other-elements {
@@ -41,6 +43,11 @@
 .active-anim {
     opacity: 1;
 }
+
+.btn-slide:hover{
+    background-color: rgba(241, 241, 241, 1);
+}
+
 .btn-slide {
     width: 50px; /* Changes width of arrows */
     height: 50px; /* Changes height of arrows */
@@ -117,4 +124,12 @@
 .slide-text p {
     font-size: 16px;
     margin-top: 5px;
+}
+/* Close button */
+.navbar-toggle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 10px;
+    height: 100px;
 }
