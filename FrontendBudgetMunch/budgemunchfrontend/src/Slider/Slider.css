@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Leckerli+One&display=swap');
 
+
+
 .container-slider {
     max-width: 100%;
     height: 700px;
@@ -41,6 +43,11 @@
 .active-anim {
     opacity: 1;
 }
+
+.btn-slide:hover{
+    background-color: rgba(241, 241, 241, 1);
+}
+
 .btn-slide {
     width: 50px; /* Changes width of arrows */
     height: 50px; /* Changes height of arrows */

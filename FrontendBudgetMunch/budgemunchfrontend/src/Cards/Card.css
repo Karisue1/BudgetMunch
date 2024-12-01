@@ -10,8 +10,8 @@
   } */
   .card {
     width: 90%; /* Default width for smaller screens */
-    max-width: 500px; /* Limit the maximum width */
-    height: 350px; /* Let height adjust based on content */
+    max-width: 400px; /* Limit the maximum width */
+    height: auto; /* Let height adjust based on content */
     margin: 30px auto; /* Center the card horizontally */
     padding: 20px;
     border-radius: 10px;

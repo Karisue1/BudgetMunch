@@ -289,8 +289,12 @@ const Login = () => {
                                         {showPassword ? <BiHide /> : <BiShow />}
                                     </span>
                                 </div>
-                                <button type="submit" className="btn btn-outline-primary">Complete Registration</button>
-                                
+
+                                <div className="button-container">
+                                    <button type="submit" className="registrationbtn">Submit</button>
+                                </div>
+                                <br/>
+
                                 <div className='register-link'>
                                     <p>Already have an account? <a href="#" onClick={openLoginForm}>Login here</a></p>
                                 </div>

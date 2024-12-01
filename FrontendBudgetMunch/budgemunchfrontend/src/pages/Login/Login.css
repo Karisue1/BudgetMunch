@@ -112,21 +112,9 @@ body {
   float:right;
 
 }
-.btn {
-  width: 100%; /* Optional: Remove if you don't want full width */
-  max-width: 200px; /* Controls the button's max width */
-  padding: 10px;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #ffc107;
-  color: black;
-  border: none;
-  text-align: center; /* Centers the text inside the button */
-  
-}
+
 /* Hover effect for the button */
-button:hover {
+.loginbtn:hover {
   background-color: #d1a45b;
 }
 .loginbtn {
@@ -142,6 +130,24 @@ button:hover {
   text-align: center; /* Centers the text inside the button */
 
 }
+
+.registrationbtn:hover {
+  background-color:#034892 ;
+}
+.registrationbtn {
+  width: 100%; /* Optional: Remove if you don't want full width */
+  max-width: 200px; /* Controls the button's max width */
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  text-align: center; /* Centers the text inside the button */
+
+}
+
 .forgot-password {
   text-align: center;
 }
