@@ -74,7 +74,7 @@ ul li {
 .nav-menu {
     background-color: #e4b157;
     width: 250px;
-    height: 105vh; /* 1150px manually gives height */
+    height: 165vh; /* 1150px manually gives height */
     display: flex;
     justify-content: flex-start;
     flex-direction: column;

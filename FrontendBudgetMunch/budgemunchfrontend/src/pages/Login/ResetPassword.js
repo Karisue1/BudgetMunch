@@ -4,18 +4,13 @@ import './ResetPassword.css';
 import { BiShow, BiHide } from "react-icons/bi";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../layout/Navbar';
+
 
 const ResetPassword = () => {
-
-    //TODO: MUST FIX ISSUE OF USER CLICKING ON SEND EMAIL TWICE,
-    //THE CODE PICKS UP the first code that was sent via e-mail and disregards the second one
-    //TODO: MUST FIX ERROR TO BE ON TOP OF THE VERIFY CODE
-    
-    //---Error and Success Messages---
     const [emailError, setEmailError] = useState("");
     const [codeError, setCodeError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
-    //---End of Error and Success Messages---
     const [email, setEmail] = useState("");
     const [showCodeInput, setShowCodeInput] = useState(false);
     const [code, setCode] = useState("");
@@ -24,19 +19,15 @@ const ResetPassword = () => {
     const [secondNewPassword, setSecondNewPassword] = useState("");
     const [showFirstPassword, setShowFirstPassword] = useState(false);
     const [showSecondPassword, setShowSecondPassword] = useState(false);
-
     const [showEmailInput, setShowEmailInput] = useState(true);
     const [isSending, setIsSending] = useState(false);
-    
+
     const navigate = useNavigate();
 
     const onSendEmail = async (e) => {
-        // prevents the form from actually submitting, giving you a chance
-        // to validate or process the input before submitting it to the server
-        // or updating the state of your React component. 
         e.preventDefault();
-        setEmailError("");//resets the Email Error to be empty
-        setSuccessMessage("");//resets the success message to be empty
+        setEmailError("");
+        setSuccessMessage("");
         setIsSending(true);
 
         try {
@@ -48,15 +39,13 @@ const ResetPassword = () => {
                 setSuccessMessage("E-mail verification sent successfully!");
                 setShowCodeInput(true);
                 setShowEmailInput(false);
-
             } else {
                 setEmailError("Email address does not exist within BudgetMunch.");
             }
         } catch (error) {
             setEmailError("An error occurred. Please try again.");
-        }finally{
+        } finally {
             setIsSending(false);
-
         }
     };
 
@@ -71,7 +60,7 @@ const ResetPassword = () => {
                 params: { email, code },
             });
             setSuccessMessage("Code verified successfully");
-            setShowPasswordResetForm(true); // Show password reset form on successful code verification
+            setShowPasswordResetForm(true);
         } catch (error) {
             setCodeError("Invalid code.");
         }
@@ -98,111 +87,109 @@ const ResetPassword = () => {
         }
     };
 
-
-    const onResendEmail = ()=>{
+    const onResendEmail = () => {
         setShowCodeInput(false);
         setShowEmailInput(true);
         setSuccessMessage("");
         setCode("");
-    }
+    };
 
     return (
-        <div className="login-container">
-            {!showPasswordResetForm ? (
-                <div className="wrapper">
-                    {showEmailInput &&(
+        <>
+            <Navbar />
+            <div className="login-container">
+                {!showPasswordResetForm ? (
+                    <div className="wrapper">
+                        {showEmailInput && (
+                            <form onSubmit={onSendEmail}>
+                                <h1>Password Reset</h1>
+                                {successMessage && <div className="alert alert-success">{successMessage}</div>}
+                                {emailError && <div className="alert alert-danger">{emailError}</div>}
+                                <div className="input-box">
 
-                    <form onSubmit={onSendEmail}>
-                        <h1>Password Reset</h1>
-                        {successMessage && <div className="alert alert-success">{successMessage}</div>}
-                        {emailError && <div className="alert alert-danger">{emailError}</div>}
-                        <div className="input-box">
-                            <p>Please input your e-mail</p>
-                            <input
-                                type="email"
-                                name="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Email"
-                                required 
-                            />   
-                        </div>
-                        <br/>
-                        {isSending ? (
-                            <span>Sending...</span> // Display "Sending..." when isSending is true
-                            ) : (
-                                <button type="submit" className="btn btn-success">Send Email</button> // Show button when not sending
-                            )}
-                    </form>
-                    )}
-
-                    {showCodeInput && (
-                        <form onSubmit={onVerifyCode}>
-                            <div className="input-box">
-                            {codeError && <div className="alert alert-danger">{codeError}</div>}
-                                <p>Please enter the 4-digit code sent to your email</p>
-                                <input
-                                    type="text"
-                                    name="code"
-                                    value={code}
-                                    onChange={(e) => setCode(e.target.value)}
-                                    placeholder="4-digit code"
-                                    maxLength={4}
-                                    required 
-                                />   
-                            </div>
-                            <br/><br/><br/>
-                            <div className="input-box">
-                            <button type="submit" className="btn btn-success me-3">Verify Code</button>
-                            <button type="button" className="btn btn-warning" onClick={onResendEmail}>Resubmit E-mail</button>
-                            </div>
-                        </form>
-                    )}
-                </div>
+                                        <p>Please input your e-mail</p>
+                                  
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="Email"
+                                        required
+                                    />   
+                                </div>
+                                <div className="email-button">
+                                    {isSending ? (
+                                        <div className='ptag'>
+                                        <span>Sending...</span>
+                                        </div>
+                                    ) : (
+                                        <button type="submit" className="btn btn-success email-button">Send Email</button>
+                                    )}
+                                </div>
+                            </form>
+                        )}
+                        {showCodeInput && (
+                            <form onSubmit={onVerifyCode}>
+                                <div className="input-box">
+                                    {codeError && <div className="alert alert-danger">{codeError}</div>}
+                                    <p>Please enter the 4-digit code sent to your email</p>
+                                    <input
+                                        type="text"
+                                        name="code"
+                                        value={code}
+                                        onChange={(e) => setCode(e.target.value)}
+                                        placeholder="4-digit code"
+                                        maxLength={4}
+                                        required 
+                                    />   
+                                </div>
+                                <div className="other-button-container">
+                                    <button type="submit" className="btn btn-success me-3">Verify Code</button>
+                                    <button type="button" className="btn btn-warning" onClick={onResendEmail}>Resubmit E-mail</button>
+                                </div>
+                            </form>
+                        )}
+                    </div>
                 ) : (
-                <div className="wrapper">
-                    <form onSubmit={onResetPassword}>
-                        {emailError && <div className="alert alert-danger">{emailError}</div>}
-                        {/* {successMessage && <div className="alert alert-success">{successMessage}</div>} */}
-
-                        <div className="password-container">
-                            <p>Enter new password</p>
-                            <div className="input-with-icon">
-                                <input
-                                    type={showFirstPassword ? "text" : "password"}
-                                    value={firstNewPassword}
-                                    onChange={(e) => setFirstNewPassword(e.target.value)}
-                                    placeholder="New password"
-                                    required
-                                />
-                                <span onClick={() => setShowFirstPassword(!showFirstPassword)} className="eye-icon">
-                                    {showFirstPassword ? <BiHide /> : <BiShow />}
-                                </span>
+                    <div className="wrapper">
+                        <form onSubmit={onResetPassword}>
+                            {emailError && <div className="alert alert-danger">{emailError}</div>}
+                            <div className="password-container">
+                                <p>Enter new password</p>
+                                <div className="input-with-icon">
+                                    <input
+                                        type={showFirstPassword ? "text" : "password"}
+                                        value={firstNewPassword}
+                                        onChange={(e) => setFirstNewPassword(e.target.value)}
+                                        placeholder="New password"
+                                        required
+                                    />
+                                    <span onClick={() => setShowFirstPassword(!showFirstPassword)} className="eye-icon">
+                                        {showFirstPassword ? <BiHide /> : <BiShow />}
+                                    </span>
+                                </div>
+                                <p>Re-enter new password</p>
+                                <div className="input-with-icon">
+                                    <input
+                                        type={showSecondPassword ? "text" : "password"}
+                                        value={secondNewPassword}
+                                        onChange={(e) => setSecondNewPassword(e.target.value)}
+                                        placeholder="Re-enter password"
+                                        required
+                                    />
+                                    <span onClick={() => setShowSecondPassword(!showSecondPassword)} className="eye-icon">
+                                        {showSecondPassword ? <BiHide /> : <BiShow />}
+                                    </span>
+                                </div>
                             </div>
-                            <br/>
-                            <p>Re-enter new password</p>
-                            <div className="input-with-icon">
-                                <input
-                                    type={showSecondPassword ? "text" : "password"}
-                                    value={secondNewPassword}
-                                    onChange={(e) => setSecondNewPassword(e.target.value)}
-                                    placeholder="Re-enter password"
-                                    required
-                                />
-                                <span onClick={() => setShowSecondPassword(!showSecondPassword)} className="eye-icon">
-                                    {showSecondPassword ? <BiHide /> : <BiShow />}
-                                </span>
-                            </div>
-                        </div>
-                        <br/><br/><br/><br/><br/><br/>
-                        <button type="submit" className="btn btn-primary">Reset Password</button>
-                    </form>
-                </div>
-            )}
-        </div>
+                            <button type="submit" className="btn btn-primary reset-button">Reset Password</button>
+                        </form>
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 
-
 export default ResetPassword;
-
