@@ -2,6 +2,24 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Installation Guide
+
+To install Node.js, it must be downloaded from the website https://nodejs.org/en.
+
+In the terminal of VSCode after entering into the correct file, enter the following to install the npm commands:
+
+### `npm install`
+
+After the installation of that is complete, enter the following to install the react-router-dom:
+
+### `npm install react-router-dom`
+
+this will allow you to route pages and navigate to other pages in the application
+
+Finally install the following to display the icons in the application:
+
+### `npm install react-icons`
+
 ## Available Scripts
 
 In the project directory, you can run:
