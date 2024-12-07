@@ -31,7 +31,7 @@ export const Slider = () => {
     useEffect(() => {
       const interval = setInterval(() => {
         nextSlide();
-      }, 10000); // Change image every 8 seconds
+      }, 3000); // Change image every 8 seconds
   
       // Clear interval on component unmount to prevent memory leaks
       return () => clearInterval(interval);
