@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# Setting up the BudgetMunch Application
+
+## Directory Structure
+               
+![alt text](image.png)
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
