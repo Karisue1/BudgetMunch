@@ -22,10 +22,11 @@ export const Sidebar = ({ isLoggedIn }) => {
       { title: 'About Us', path: '/about-us', icon: <IoBookOutline size={30} />, show: true },
       { title: 'Log Out', action: handleLogout, icon: <FaSignOutAlt size={30} />, show: isLoggedIn },
     ];
-  
+  //display
     return (
       <div className="sidebar">
         <ul className="nav-menu-items">
+          {/* shows the sidebar */}
           {menuItems.map((item, index) => (
             item.show && (
               <li key={index} className="nav-text">

@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import notfoundImage from './Login/Components/notfound.png';
 import Navbar from '../layout/Navbar';
 export const NotFoundPage = () => {
+
+    //display for the not found page
     return (
         
         <><div className='navebar'>

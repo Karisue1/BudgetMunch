@@ -9,6 +9,7 @@ import { FaHeartCirclePlus } from "react-icons/fa6";import './Home.css';
 //TODO: FIX the check for invalid address: add API logic
 
 export default function Home() {
+  //consts for getting the restaurantss information and being able to search for the info
   const [restaurants, setRestaurants] = useState([]);
   const [favorites, setFavorites] = useState([]);
   
@@ -30,18 +31,18 @@ export default function Home() {
       setFavorites([...favorites, restaurant]);
     }
   };
-  
+  //inputing the address in the search bar
   const onInputChangeAddress = (e) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
     setAddressError(""); 
     setBudgetError("");  
   };
-
+  //chaecking if the interger entered is a valid number
   const isValidBudget = (budget) => {
     const num = Number(budget);
     return !isNaN(num) && num > 0;
   };
-
+  //geting the address on submit
   const onSubmitAddress = async (e) => {
     e.preventDefault();
     setAddressError("");
@@ -86,7 +87,7 @@ export default function Home() {
       return [];
     }
   };
-
+  //function for the sorting buttons
   const handleSort = (key) => {
     let direction = 'ascending';
     if (sortConfig.key === key && sortConfig.direction === 'ascending') {
@@ -105,7 +106,7 @@ export default function Home() {
     });
     setRestaurants(sortedData);
   };
-
+  //styling the buttons
   const renderSortArrow = (key) => {
     if (sortConfig.key === key) {
       return sortConfig.direction === 'ascending' ? ' ↑' : ' ↓';
@@ -141,7 +142,7 @@ export default function Home() {
     );
   });
 
-
+  //display
   return (
     <><div className='navebar'>
       <Navbar />

@@ -9,12 +9,16 @@ import axios from "axios";
 import Navbar from '../../layout/Navbar.js';
 
 const Login = () => {
+
+    //consts for different features for username, password and regstration
     const [showRegistrationForm, setShowRegistrationForm] = useState(false);
     const [error, setError] = useState("");
     const [emailError, setEmailError] = useState("");  // Separate error state for email
     const [userNameError, setUserNameError] = useState("");  // Separate error state for username
     const [showPassword, setShowPassword] = useState(false); //state to show password or not
-   
+    const { username: loginUsername, password: loginPassword } = loginData;
+    const { name, username: regUsername, email, password: regPassword } = registrationData;
+    
     // State for login form
     const [loginData, setLoginData] = useState({
         username: "",
@@ -28,14 +32,11 @@ const Login = () => {
         email: "",
         password: ""
     });
-
-    const { username: loginUsername, password: loginPassword } = loginData;
-    const { name, username: regUsername, email, password: regPassword } = registrationData;
-
+   //Log in submit
     const handleLoginChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
     };
-
+    //Registration submit
     const handleRegistrationChange = (e) => {
         setRegistrationData({ ...registrationData, [e.target.name]: e.target.value });
     };
@@ -44,7 +45,7 @@ const Login = () => {
     const passwordVisibility = () => {
         setShowPassword(!showPassword);
     }
-
+    //verifies email before continuing
     const checkEmail = async (email) => {
         if (email) {
             try {
@@ -61,7 +62,7 @@ const Login = () => {
             setEmailError(""); // Clear error if no email is provided
         }
     };
-
+    //makes sure there is no duplicate usernames
     const checkUsername = async (username) => {
         if (username) {
             try {
@@ -78,17 +79,17 @@ const Login = () => {
             setUserNameError(""); // Clear error if no username is provided
         }
     };
-
+    //change pages to registration form
     const openRegistrationForm = () => {
         setShowRegistrationForm(true);
     };
-
+    //open log in
     const openLoginForm = () => {
         setShowRegistrationForm(false);
     };
-
+    //navigate to different page if invalid response
     let navigate = useNavigate();
-
+    //saves registration info into the datbase
     const onSubmitRegister = async (e) => {
         e.preventDefault();
         
@@ -149,7 +150,7 @@ const Login = () => {
             });
         };
     }, [showRegistrationForm]); // Re-run effect when form view changes
-
+    //log in submit, marks the user logging in
     const onSubmitLogin = async (e) => {
         e.preventDefault();
         const loginUserData = { userName: loginUsername, password: loginPassword };
@@ -234,6 +235,7 @@ const Login = () => {
       </form>
     </div>
   ) : (
+                    //switch to registration form after sign up button
                     <div className="registrationForm">
                         {emailError && <div className="alert alert-danger" role="alert">{emailError}</div>}
                         {userNameError && <div className="alert alert-danger" role="alert">{userNameError}</div>}
@@ -276,6 +278,8 @@ const Login = () => {
                                         required
                                     />
                                 </div>
+
+                                {/* password entry */}
                                 <div className="password-container">
                                     <input
                                         type={showPassword ? "text" : "password"}

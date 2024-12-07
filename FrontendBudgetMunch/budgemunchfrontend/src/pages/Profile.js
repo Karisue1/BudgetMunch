@@ -75,6 +75,9 @@ const Profile = () => {
 //     </>
 //   );
 // };
+
+
+//the part hides the info displayed when logged out and retrieves it when logged in.
 const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
@@ -98,7 +101,7 @@ const [user, setUser] = useState(null);
     if (!user) {
         return <div>Loading...</div>;
     }
-
+    //display info for the profile
     return (
         <>
             <div className="navbar-menu">

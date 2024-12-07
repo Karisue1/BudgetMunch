@@ -1,5 +1,5 @@
 import {v4 as uuidv4 } from "uuid";
-
+//Contains the images on the slider in the about us page
 const dataSlider = [
 
     { 

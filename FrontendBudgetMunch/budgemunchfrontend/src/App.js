@@ -13,6 +13,8 @@ import ResetPassword from './pages/Login/ResetPassword';
 
 
 function App() {
+
+  //this contains all the routes for navigating between all the pages
   return (
     
     <><div className='routes'>

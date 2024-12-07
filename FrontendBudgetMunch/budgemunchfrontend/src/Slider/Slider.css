@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Leckerli+One&display=swap');
 
-
+/*Styling for the slider on the about us*/
 
 .container-slider {
     max-width: 100%;
@@ -11,7 +11,7 @@
     z-index: 1;
     overflow: hidden;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
+}/*Slider picture area*/
 @media screen and (max-width: 768px) {
     .container-slider{
         height: 50vh;
@@ -43,7 +43,7 @@
 .active-anim {
     opacity: 1;
 }
-
+/*Styling of the buttons for left and right and toggle dots*/
 .btn-slide:hover{
     background-color: rgba(241, 241, 241, 1);
 }

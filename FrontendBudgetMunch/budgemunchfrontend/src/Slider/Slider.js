@@ -5,6 +5,8 @@ import dataSlider from "./dataSlider";
 import Card from '../Cards/Card';
 
 export const Slider = () => {
+
+  //functions to move images left and right on a slider
   const [slideIndex, setSlideIndex] = useState(1);
 
   const nextSlide = () => {

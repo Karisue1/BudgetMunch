@@ -8,6 +8,7 @@ import Navbar from '../../layout/Navbar';
 
 
 const ResetPassword = () => {
+    //consts for different aspects for the reset password page
     const [emailError, setEmailError] = useState("");
     const [codeError, setCodeError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -23,7 +24,7 @@ const ResetPassword = () => {
     const [isSending, setIsSending] = useState(false);
 
     const navigate = useNavigate();
-
+    //send an email if reseting a password
     const onSendEmail = async (e) => {
         e.preventDefault();
         setEmailError("");
@@ -48,7 +49,7 @@ const ResetPassword = () => {
             setIsSending(false);
         }
     };
-
+    //the code  to verify the user
     const onVerifyCode = async (e) => {
         e.preventDefault();
         setEmailError("");
@@ -65,7 +66,7 @@ const ResetPassword = () => {
             setCodeError("Invalid code.");
         }
     };
-
+    //reset password
     const onResetPassword = async (e) => {
         e.preventDefault();
         setEmailError("");
@@ -86,14 +87,14 @@ const ResetPassword = () => {
             setEmailError("Failed to reset password.");
         }
     };
-
+    //if user needs to resend the code
     const onResendEmail = () => {
         setShowCodeInput(false);
         setShowEmailInput(true);
         setSuccessMessage("");
         setCode("");
     };
-
+    //display and function of code
     return (
         <>
             <Navbar />

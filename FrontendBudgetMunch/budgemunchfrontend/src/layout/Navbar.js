@@ -21,7 +21,7 @@ export default function Navbar() {
       setIsLoggedIn(true); // User is logged in
     }
   }, []);
-
+//Log out function
   const handleLoginLogout = () => {
     if (isLoggedIn) {
       // Logout logic
@@ -34,7 +34,7 @@ export default function Navbar() {
       localStorage.setItem('user', 'loggedIn');
     }
   };
-
+//display 
   return (
     <IconContext.Provider value={{ color: 'black' }}>
       <div>

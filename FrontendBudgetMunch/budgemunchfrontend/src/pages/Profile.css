@@ -5,6 +5,7 @@
   align-items: center;
   min-height: 100vh; 
 }
+/*styling for the profile page*/
 .profile{
 
   background-image: url("./Login/Components/profile.png");
@@ -22,7 +23,7 @@
   position: relative;
  
 }
-
+/*the profile image*/
 img{
   width: 100px;
   height: 100px;
@@ -36,6 +37,8 @@ img{
   border-radius: 100%;
   margin: 0 auto;
 }
+
+/*the info text on the profile page*/
 h1{
 
   text-align: center;
