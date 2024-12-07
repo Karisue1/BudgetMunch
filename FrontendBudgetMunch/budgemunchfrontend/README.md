@@ -18,6 +18,8 @@ In the terminal of VSCode after entering into the correct file, enter the follow
 
 ### `npm install`
 
+![alt text](image-1.png)
+
 After the installation of that is complete, enter the following to install the react-router-dom:
 
 ### `npm install react-router-dom`
