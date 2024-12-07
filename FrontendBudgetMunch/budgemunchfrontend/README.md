@@ -6,6 +6,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 To install Node.js, it must be downloaded from the website https://nodejs.org/en.
 
+To get to the correct file enter:
+
+### `cd FrontendBudgetMunch`
+
+Then,
+
+### `cd budgemunchfrontend`
+
 In the terminal of VSCode after entering into the correct file, enter the following to install the npm commands:
 
 ### `npm install`
