@@ -2,7 +2,7 @@
 
 ## Directory Structure
                
-![alt text](image.png)
+![alt text](usermanual.png)
 
 ## Getting Started with Create React App
 
